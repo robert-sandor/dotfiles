@@ -2,12 +2,6 @@
 
 set -euo pipefail
 
-# tmux session manager using zoxide + fzf
-# Usage: sessionizer.sh
-# - Lists directories from zoxide
-# - Pick one with fzf
-# - Creates or switches to a tmux session rooted at that directory
-
 err() { printf '%s\n' "$*" >&2; }
 
 # Ensure dependencies exist
@@ -24,8 +18,6 @@ fi
 
 # Build the candidate list from zoxide and select via fzf
 if ! selection=$(zoxide query -i); then
-  # if ! selection=$(zoxide query -l 2>/dev/null | fzf --height 60% --reverse --prompt "tmux sessionizer > " --tiebreak=begin,index); then
-  # User canceled or no selection
   exit 0
 fi
 
@@ -40,18 +32,8 @@ if [ ! -d "$dir" ]; then
 fi
 
 # Derive a stable, mostly human-friendly tmux session name from the path
-base=$(basename -- "$dir")
-# sanitize base: lowercase and replace non-alphanum (except . _ -) with dashes
-base=$(printf '%s' "$base" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9._-]/-/g')
-
-# Compute a short, stable suffix from the full path for uniqueness (6 chars)
-hash=""
-if command -v md5 >/dev/null 2>&1; then
-  hash=$(md5 -qs "$dir" | cut -c1-6)
-elif command -v shasum >/dev/null 2>&1; then
-  hash=$(printf '%s' "$dir" | shasum -a 1 | awk '{print $1}' | cut -c1-6)
-fi
-session="${base}-${hash}"
+parent=$(dirname -- $dir)
+session="$(basename -- $parent)/$(basename -- $dir)"
 
 # Check if session exists
 if tmux has-session -t "$session" >/dev/null 2>&1; then
