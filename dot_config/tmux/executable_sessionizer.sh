@@ -31,9 +31,9 @@ if [ ! -d "$dir" ]; then
   exit 1
 fi
 
-# Derive a stable, mostly human-friendly tmux session name from the path
-parent=$(dirname -- $dir)
-session="$(basename -- $parent)/$(basename -- $dir)"
+parent="${dir%/*}"                 # Get parent directory path
+session="${parent##*/}/${dir##*/}" # Get basename of parent + basename of dir
+session="${session//./_}"          # Replace all dots with underscores
 
 # Check if session exists
 if tmux has-session -t "$session" >/dev/null 2>&1; then
