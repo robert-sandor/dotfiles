@@ -1,54 +1,74 @@
 #!/usr/bin/env bash
+
 set -euo pipefail
 
-function paths {
-  SELECTED_PATH=$(
-    zoxide query -l |
-      fzf --tmux --border-label " Switch to session in directory " ||
-      true
-  )
+# tmux session manager using zoxide + fzf
+# Usage: sessionizer.sh
+# - Lists directories from zoxide
+# - Pick one with fzf
+# - Creates or switches to a tmux session rooted at that directory
 
-  [ -z "$SELECTED_PATH" ] && exit 0
+err() { printf '%s\n' "$*" >&2; }
 
-  zoxide add "$SELECTED_PATH"
+# Ensure dependencies exist
+missing=0
+for cmd in zoxide fzf tmux; do
+  if ! command -v "$cmd" >/dev/null 2>&1; then
+    err "sessionizer: missing dependency: $cmd"
+    missing=1
+  fi
+done
+if [ "$missing" -ne 0 ]; then
+  exit 127
+fi
 
-  SELECTED_PATH_LOWER=$(echo "$SELECTED_PATH" | tr "[:upper:]" "[:lower:]")
-  SESSION_NAME="$(echo "$(basename "$(dirname "$SELECTED_PATH_LOWER")")/$(basename "$SELECTED_PATH_LOWER")" | tr . _)"
+# Build the candidate list from zoxide and select via fzf
+if ! selection=$(zoxide query -i); then
+  # if ! selection=$(zoxide query -l 2>/dev/null | fzf --height 60% --reverse --prompt "tmux sessionizer > " --tiebreak=begin,index); then
+  # User canceled or no selection
+  exit 0
+fi
 
-  tmux has-session -t "$SESSION_NAME" 2>/dev/null ||
-    tmux new-session -ds "$SESSION_NAME" -c "$SELECTED_PATH"
+if [ -z "${selection}" ]; then
+  exit 0
+fi
 
+dir=${selection}
+if [ ! -d "$dir" ]; then
+  err "sessionizer: chosen path does not exist: $dir"
+  exit 1
+fi
+
+# Derive a stable, mostly human-friendly tmux session name from the path
+base=$(basename -- "$dir")
+# sanitize base: lowercase and replace non-alphanum (except . _ -) with dashes
+base=$(printf '%s' "$base" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9._-]/-/g')
+
+# Compute a short, stable suffix from the full path for uniqueness (6 chars)
+hash=""
+if command -v md5 >/dev/null 2>&1; then
+  hash=$(md5 -qs "$dir" | cut -c1-6)
+elif command -v shasum >/dev/null 2>&1; then
+  hash=$(printf '%s' "$dir" | shasum -a 1 | awk '{print $1}' | cut -c1-6)
+fi
+session="${base}-${hash}"
+
+# Check if session exists
+if tmux has-session -t "$session" >/dev/null 2>&1; then
   if [ -n "${TMUX-}" ]; then
-    tmux switch-client -t "$SESSION_NAME"
+    tmux switch-client -t "$session"
   else
-    tmux attach -t "$SESSION_NAME"
+    exec tmux attach-session -t "$session"
   fi
-}
-
-function sessions {
-  SESSION_NAME=$(
-    tmux list-sessions |
-      sed -E 's/:.*$//' |
-      rg -v "$(tmux display-message -p '#S')" |
-      fzf --tmux || true
-  )
-
-  if [ -n "$SESSION_NAME" ]; then
-    if [ -n "${TMUX-}" ]; then
-      tmux switch-client -t "$SESSION_NAME"
-    else
-      tmux attach -t "$SESSION_NAME"
+else
+  if [ -n "${TMUX-}" ]; then
+    # Create detached session with working directory, then switch
+    if ! tmux new-session -d -s "$session" -c "$dir"; then
+      err "sessionizer: failed to create tmux session '$session'"
+      exit 1
     fi
+    tmux switch-client -t "$session"
+  else
+    exec tmux new-session -s "$session" -c "$dir"
   fi
-}
-
-ACTION=${1-}
-
-case "$ACTION" in
-paths)
-  paths "$@"
-  ;;
-sessions)
-  sessions "$@"
-  ;;
-esac
+fi
