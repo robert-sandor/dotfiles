@@ -1,3 +1,4 @@
+tap "sst/tap"
 # Simple, modern, secure file encryption
 brew "age"
 # Automate deployment, configuration, and upgrading
@@ -12,8 +13,12 @@ brew "bat"
 brew "bitwarden-cli"
 # Resource monitor. C++ version and continuation of bashtop and bpytop
 brew "btop"
+# Multi-shell multi-command argument completer
+brew "carapace"
 # Manage your dotfiles across multiple diverse machines, securely
 brew "chezmoi"
+# Enterprise friendly way of detecting and preventing secrets in code
+brew "detect-secrets"
 # Pack, ship and run any application as a lightweight container
 brew "docker"
 # Isolated development environments using Docker
@@ -34,6 +39,8 @@ brew "ffmpeg"
 brew "fish"
 # Command-line fuzzy finder written in Go
 brew "fzf"
+# GitHub command-line tool
+brew "gh"
 # Distributed revision control system
 brew "git"
 # Syntax-highlighting pager for git and diff output
@@ -88,6 +95,8 @@ brew "sqlx-cli"
 brew "starship"
 # Opinionated Lua code formatter
 brew "stylua"
+# Command-line tool to interact with Gitea servers
+brew "tea"
 # Very fast implementation of tldr in Rust
 brew "tealdeer"
 # Terminal multiplexer
@@ -102,10 +111,10 @@ brew "websocat"
 brew "wimlib"
 # Friendly and fast tool for sending HTTP requests
 brew "xh"
-# Pluggable terminal workspace, with terminal multiplexer as the base feature
-brew "zellij"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
+# The AI coding agent built for the terminal.
+brew "sst/tap/opencode"
 # Application uninstaller
 cask "appcleaner"
 # Tool to flash OS images to SD cards & USB drives
@@ -118,6 +127,8 @@ cask "brave-browser"
 cask "discord"
 # Desktop client for Ente Auth
 cask "ente-auth"
+# Web browser
+cask "firefox"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
 # Web browser
@@ -154,6 +165,8 @@ cask "spotify"
 cask "steam"
 # Media player based on MPlayer and mplayer2
 cask "stolendata-mpv"
+# Real time file synchronisation software
+cask "syncthing-app"
 # Mesh VPN based on WireGuard
 cask "tailscale-app"
 # Unpacks archive files
@@ -168,9 +181,8 @@ cask "unnaturalscrollwheels"
 cask "whatsapp"
 # Multiplayer code editor
 cask "zed"
-# Gecko based web browser
-cask "zen"
 mas "Bitwarden", id: 1352778147
+mas "keymapp", id: 6472865291
 mas "Keynote", id: 409183694
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
