@@ -31,6 +31,8 @@ if [ ! -d "$dir" ]; then
   exit 1
 fi
 
+zoxide add "$dir"
+
 parent="${dir%/*}"                 # Get parent directory path
 session="${parent##*/}/${dir##*/}" # Get basename of parent + basename of dir
 session="${session//./_}"          # Replace all dots with underscores
