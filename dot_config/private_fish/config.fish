@@ -27,4 +27,7 @@ if status --is-interactive
 
     # abbreviations
     source "$fish_conf_dir/abbrs.fish"
+
+    # make bitwarden the ssh agent
+    set_bitwarden_ssh_agent
 end
