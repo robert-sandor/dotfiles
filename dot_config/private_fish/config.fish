@@ -24,6 +24,7 @@ if status --is-interactive
     command -q mise; and mise activate fish | source
     command -q yazi; and source "$fish_conf_dir/yazi.fish"
     command -q bw; and source "$fish_conf_dir/bitwarden.fish"
+    command -q carapace; and set -gx CARAPACE_BRIDGES 'zsh,fish,bash,inshellisense'; and carapace _carapace | source
 
     # abbreviations
     source "$fish_conf_dir/abbrs.fish"
