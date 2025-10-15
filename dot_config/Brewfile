@@ -135,10 +135,14 @@ cask "ghostty"
 cask "google-chrome"
 # Client for the Google Drive storage service
 cask "google-drive"
+# Chromium-based web browser
+cask "helium-browser"
 # Jellyfin desktop client
 cask "jellyfin-media-player"
 # JetBrains tools manager
 cask "jetbrains-toolbox"
+# Video format converter (transcoder)
+cask "makemkv"
 # Desktop sync client for Nextcloud software products
 cask "nextcloud"
 # Get up and running with large language models locally
@@ -171,6 +175,8 @@ cask "syncthing-app"
 cask "tailscale-app"
 # Unpacks archive files
 cask "the-unarchiver"
+# Music streaming service with high fidelity sound and hi-def video quality
+cask "tidal"
 # To-do list
 cask "todoist-app"
 # Open-source BitTorrent client
