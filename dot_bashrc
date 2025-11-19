@@ -1,5 +1,16 @@
 #!/usr/bin/env bash
 
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
+
+# User specific environment
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+export PATH
+
 # if homebrew is installed (likely on macos) load its shellenv to be able to start fish
 if test -f /opt/homebrew/bin/brew; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
