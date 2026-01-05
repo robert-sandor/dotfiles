@@ -109,6 +109,7 @@ cask "balenaetcher"
 cask "betterdisplay"
 # Voice and text chat software
 cask "discord"
+cask "font-jetbrains-mono-nerd-font"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
 # Web browser
