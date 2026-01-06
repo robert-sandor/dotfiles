@@ -238,3 +238,11 @@ symbol = "terraform "
 
 [zig]
 symbol = "zig "
+
+[custom.chezmoi]
+description = 'show status of dotfile sync with chezmoi'
+command = '''test -n "$(chezmoi status)" && echo "chezmoi"'''
+when = ''' command -q chezmoi '''
+symbol = '!'
+style = 'dimmed red'
+
