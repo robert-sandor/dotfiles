@@ -8,12 +8,12 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
   "title_bar": {
-    "show_sign_in": false
+    "show_sign_in": false,
   },
   "git": {
     "inline_blame": {
-      "enabled": false
-    }
+      "enabled": false,
+    },
   },
   "show_edit_predictions": false,
   "diagnostics": {
@@ -40,6 +40,10 @@
   "buffer_font_family": "JetBrainsMono Nerd Font",
   "icon_theme": "Catppuccin Mocha",
   "vim_mode": true,
+  "vim": {
+    "use_system_clipboard": "never",
+    "use_smartcase_find": true,
+  },
   "ui_font_size": 14.0,
   "buffer_font_size": 14.0,
   "theme": {

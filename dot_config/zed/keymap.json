@@ -7,15 +7,30 @@
 // from the command palette.
 [
   {
-    "context": "Workspace",
+    "context": "EmptyPane || SharedScreen || (Editor && vim_mode == normal)",
     "bindings": {
-      // "shift shift": "file_finder::Toggle"
+      "space space": "file_finder::Toggle",
+      "space f": "file_finder::Toggle",
     },
   },
   {
-    "context": "Editor && vim_mode == normal",
+    "context": "VimControl && !menu",
     "bindings": {
-      "space space": "file_finder::Toggle",
+      "g y": ["workspace::SendKeystrokes", "\" + y"],
+    },
+  },
+  {
+    "context": "vim_mode == normal && !menu",
+    "bindings": {
+      "g p": ["workspace::SendKeystrokes", "\" + p"],
+    },
+  },
+  {
+    "context": "vim_mode == visual && !menu",
+    "bindings": {
+      "g p": ["workspace::SendKeystrokes", "\" + P"],
+      "<": ["workspace::SendKeystrokes", "< g v"],
+      ">": ["workspace::SendKeystrokes", "> g v"],
     },
   },
 ]
