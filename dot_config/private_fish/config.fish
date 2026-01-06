@@ -20,7 +20,7 @@ if status --is-interactive
     command -q chezmoi; and source "$fish_conf_dir/chezmoi.fish"
     command -q fzf; and source "$fish_conf_dir/fzf.fish"
     command -q zoxide; and zoxide init fish | source
-    command -q starship; and starship init fish | source; and enable_transience
+    command -q starship; and starship init fish | source; # and enable_transience
     command -q mise; and mise activate fish | source
     command -q yazi; and source "$fish_conf_dir/yazi.fish"
     command -q bw; and source "$fish_conf_dir/bitwarden.fish"
