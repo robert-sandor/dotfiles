@@ -7,6 +7,10 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+  },
   "title_bar": {
     "show_sign_in": false,
   },
@@ -50,6 +54,17 @@
     "mode": "system",
     "light": "One Light",
     "dark": "Catppuccin Mocha",
+  },
+  "auto_install_extensions": {
+    "ansible": true,
+    "basher": true,
+    "catppuccin": true,
+    "catppuccin-icons": true,
+    "docker-compose": true,
+    "dockerfile": true,
+    "fish": true,
+    "tombi": true,
+    "toml": true,
   },
   "file_types": {
     "Ansible": [
