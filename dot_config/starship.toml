@@ -241,8 +241,7 @@ symbol = "zig "
 
 [custom.chezmoi]
 description = 'show status of dotfile sync with chezmoi'
-command = '''test -n "$(chezmoi status)" && echo "chezmoi"'''
-when = ''' command -q chezmoi '''
-symbol = '!'
+when = ''' command -q chezmoi && test -n "$(chezmoi status)"'''
+symbol = '!chezmoi'
 style = 'dimmed red'
 
