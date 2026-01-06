@@ -1,5 +1,14 @@
+"$schema" = "https://starship.rs/config-schema.json"
+right_format = "$custom$time"
+
+[time]
+disabled = false
+format = "[$time]($style) "
+style = "dimmed yellow"
+
 [custom.chezmoi]
-description = 'show status of dotfile sync with chezmoi'
+description = "show status of dotfile sync with chezmoi"
+command = "echo chezmoi"
 when = ''' command -q chezmoi && test -n "$(chezmoi status)"'''
-symbol = '!chezmoi'
-style = 'dimmed red'
+symbol = "!"
+style = "dimmed red"
