@@ -6,3 +6,11 @@ function dotfiles -d 'manage dotfiles'
         test -n "$file"; and chezmoi edit -a --watch "~/$file"
     end
 end
+
+function chezmoi_status -d 'gets status for chezmoi'
+    if test -n "$(chezmoi status)"
+        echo "chezmoi has changes"
+    else
+        echo "chezmoi is synced"
+    end
+end
