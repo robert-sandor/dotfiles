@@ -19,6 +19,9 @@
       "enabled": false,
     },
   },
+  "completions": {
+    "words": "enabled",
+  },
   "show_edit_predictions": false,
   "diagnostics": {
     "inline": {
