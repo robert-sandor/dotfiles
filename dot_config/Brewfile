@@ -99,6 +99,8 @@ brew "uv"
 brew "websocat"
 # Friendly and fast tool for sending HTTP requests
 brew "xh"
+# Language Server for Yaml Files
+brew "yaml-language-server"
 # Blazing fast terminal file manager written in Rust, based on async I/O
 brew "yazi"
 # Shell extension to navigate your filesystem faster
