@@ -41,7 +41,7 @@
     "runnables": true,
   },
   "relative_line_numbers": "enabled",
-  "ui_font_family": "JetBrainsMono Nerd Font",
+  "ui_font_family": ".ZedSans",
   "buffer_line_height": "comfortable",
   "buffer_font_weight": 400.0,
   "buffer_font_family": "JetBrainsMono Nerd Font",
