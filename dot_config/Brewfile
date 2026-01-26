@@ -111,6 +111,8 @@ cask "appcleaner"
 cask "balenaetcher"
 # Display management tool
 cask "betterdisplay"
+# Anthropic's official Claude AI desktop app
+cask "claude"
 # Voice and text chat software
 cask "discord"
 cask "font-jetbrains-mono-nerd-font"
