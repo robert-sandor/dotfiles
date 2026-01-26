@@ -25,6 +25,7 @@ if status --is-interactive
     command -q yazi; and source "$fish_conf_dir/yazi.fish"
     command -q bw; and source "$fish_conf_dir/bitwarden.fish"
     command -q carapace; and set -gx CARAPACE_BRIDGES 'zsh,fish,bash,inshellisense'; and carapace _carapace | source
+    command -q rg; and set -gx RIPGREP_CONFIG_PATH ~/.config/ripgreprc
 
     # abbreviations
     source "$fish_conf_dir/abbrs.fish"

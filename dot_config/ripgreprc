@@ -1,0 +1,8 @@
+# Search hidden files by default
+--hidden
+
+# Don't search in .git/* by default
+--glob=!.git/*
+
+# Use smart case
+--smart-case
