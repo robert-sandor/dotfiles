@@ -33,7 +33,7 @@ brew "dust"
 brew "eza"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
-# Play, record, convert, and stream audio and video
+# Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
 # User-friendly command-line shell for UNIX-like operating systems
 brew "fish"
@@ -45,7 +45,7 @@ brew "git"
 brew "git-delta"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
-# Tools and libraries to manipulate images in many formats
+# Tools and libraries to manipulate images in select formats
 brew "imagemagick"
 # Simple terminal UI for git commands
 brew "lazygit"
@@ -113,6 +113,8 @@ cask "balenaetcher"
 cask "betterdisplay"
 # Anthropic's official Claude AI desktop app
 cask "claude"
+# Terminal-based AI coding assistant
+cask "claude-code"
 # Voice and text chat software
 cask "discord"
 cask "font-jetbrains-mono-nerd-font"
@@ -126,6 +128,10 @@ cask "google-chrome"
 cask "google-drive"
 # Free and open-source media player
 cask "iina"
+# Jellyfin desktop client
+cask "jellyfin-media-player"
+# Open-source cross-platform alternative to AirDrop
+cask "localsend"
 # Desktop sync client for Nextcloud software products
 cask "nextcloud"
 # Knowledge base that works on top of a local folder of plain text Markdown files
