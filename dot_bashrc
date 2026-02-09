@@ -2,12 +2,12 @@
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
-    . /etc/bashrc
+  . /etc/bashrc
 fi
 
 # User specific environment
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
-    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+  PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 fi
 export PATH
 
@@ -18,9 +18,7 @@ elif test -f /home/linuxbrew/.linuxbrew/bin/brew; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
-# start fish if not the parent process, there's no execution string (i.e. zsh -c "echo hello") and it's the first level of shell
-if ps -o comm -p $PPID | grep -qv fish; then
-  if [[ -z "${BASH_EXECUTION_STRING}" && "$SHLVL" == 1 ]]; then
-    exec fish
-  fi
+# start fish if not the parent process, is first shell level and is not 'dumb' terminal
+if ps -o comm -p $PPID | grep -qv fish && [[ "${SHLVL}" == "1" ]] && [[ "${TERM}" != "dumb" ]]; then
+  exec fish
 fi
