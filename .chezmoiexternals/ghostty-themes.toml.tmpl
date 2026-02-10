@@ -1,4 +1,4 @@
-{{ if eq .hostType "desktop" }}
+{{ if not .headless }}
 [".config/ghostty/themes"]
 type = "archive"
 url = "https://github.com/catppuccin/ghostty/archive/refs/heads/main.zip"

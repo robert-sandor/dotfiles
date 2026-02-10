@@ -1,6 +1,6 @@
 [".config/nvim"]
 type = "git-repo"
-{{ if eq .hostType "server" }}
+{{ if .headless }}
 url = "https://github.com/robert-sandor/nvim.git"
 {{ else }}
 url = "git@github.com:robert-sandor/nvim.git"

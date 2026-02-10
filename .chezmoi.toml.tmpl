@@ -1,19 +1,30 @@
-{{- $email := promptString "email" "sandorrobertk94@gmail.com" -}}
-{{- $fullname := promptString "fullname" "Robert Sandor" -}}
+{{- $email := "sandorrobertk94@gmail.com" -}}
+{{- $name := "Robert Sandor" -}}
 
-{{- $hostTypeChoices := list "desktop" "server" -}}
-{{- $hostType := promptChoice "hostType" $hostTypeChoices -}}
+{{- $headless := true -}}
+{{- if stdinIsATTY -}}
+{{-   $headless := promptBoolOnce . "headless" "headless" false -}}
+{{- end -}}
+
+{{- $font := "JetBrainsMono Nerd Font" -}}
+
+{{- $osID := .chezmoi.os -}}
+{{- if (and (eq .chezmoi.os "linux") (hasKey .chezmoi.osRelease "id")) -}}
+{{-   $osID = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
+{{- end -}}
+
+{{- $fontSize := 12 -}}
+{{- if eq $osID "darwin" -}}
+{{-   $fontSize := 14 -}}
+{{- end -}}
 
 [data]
-hostType = {{ $hostType | quote }}
-
-[data.user]
 email = {{ $email | quote }}
-fullname = {{ $fullname | quote }}
-
-[data.terminal]
-font = "JetBrainsMono Nerd Font"
-fontSize = {{ if eq .chezmoi.os "darwin" }} 14 {{ else }} 12 {{ end }}
+name = {{ $name | quote }}
+headless = {{ $headless }}
+font = {{ $font | quote }}
+fontSize = {{ $fontSize }}
+osid = {{ $osID | quote }}
 
 [diff]
 command = "delta"

@@ -16,8 +16,8 @@
 	rebase = true
 
 [user]
-	email = {{ .user.email | quote }}
-	name = {{ .user.fullname | quote }}
+	email = {{ .email | quote }}
+	name = {{ .name | quote }}
 
 [merge]
   conflictstyle = zdiff3

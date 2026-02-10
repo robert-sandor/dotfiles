@@ -1,8 +1,8 @@
-{{ if ne .chezmoi.os "darwin" }}
+{{ if ne .osid "darwin" }}
 .config/Brewfile # only manage Brewfile on macos
 {{ end }}
 
-{{ if ne .hostType "desktop" }}
+{{ if .headless }}
 .ideavimrc
 .config/ghostty
 .config/kitty
