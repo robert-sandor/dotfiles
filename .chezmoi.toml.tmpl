@@ -3,7 +3,7 @@
 
 {{- $headless := true -}}
 {{- if stdinIsATTY -}}
-{{-   $headless := promptBoolOnce . "headless" "headless" false -}}
+{{-   $headless = promptBoolOnce . "headless" "headless" false -}}
 {{- end -}}
 
 {{- $font := "JetBrainsMono Nerd Font" -}}
@@ -14,8 +14,8 @@
 {{- end -}}
 
 {{- $fontSize := 12 -}}
-{{- if eq $osID "darwin" -}}
-{{-   $fontSize := 14 -}}
+{{- if eq .chezmoi.os "darwin" -}}
+{{-   $fontSize = 14 -}}
 {{- end -}}
 
 [data]
