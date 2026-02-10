@@ -1,4 +1,3 @@
-tap "sst/tap"
 # Automate deployment, configuration, and upgrading
 brew "ansible"
 # Language Server for Ansible Files

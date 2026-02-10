@@ -1,5 +1,5 @@
 {{ if ne .osid "darwin" }}
-.config/Brewfile # only manage Brewfile on macos
+.config/Brewfile
 {{ end }}
 
 {{ if .headless }}
