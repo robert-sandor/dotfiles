@@ -7,3 +7,10 @@ command = "echo dotfiles"
 when = ''' command -q chezmoi && test -n "$(chezmoi status)"'''
 symbol = "!"
 style = "dimmed red"
+
+[custom.bitwarden]
+description = "show status of bitwarden-cli"
+command = "echo bw"
+when = ''' test -n "$BW_SESSION" '''
+symbol = " "
+style = "blue"
