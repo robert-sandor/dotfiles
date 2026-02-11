@@ -2,7 +2,9 @@
 {{- $name := "Robert Sandor" -}}
 
 {{- $headless := true -}}
-{{- if stdinIsATTY -}}
+{{- if eq .chezmoi.os "darwin" -}}
+{{-   $headless = false -}}
+{{- else if stdinIsATTY -}}
 {{-   $headless = promptBoolOnce . "headless" "headless" false -}}
 {{- end -}}
 
