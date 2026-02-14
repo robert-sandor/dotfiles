@@ -1,0 +1,20 @@
+[font]
+size = {{ .fontSize }}
+offset = { x = 0, y = 2 }
+
+[font.normal]
+family = {{ .font | quote }}
+
+[window]
+dynamic_padding = true
+padding = { x = 8, y = 8 }
+
+[cursor]
+style = "Beam"
+vi_mode_style = "Block"
+
+[mouse]
+hide_when_typing = true
+
+[general]
+import = ["~/.config/alacritty/themes/catppuccin-mocha.toml"]

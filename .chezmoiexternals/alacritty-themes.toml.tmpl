@@ -1,0 +1,8 @@
+{{ if not .headless }}
+[".config/alacritty/themes"]
+type = "archive"
+url = "https://github.com/catppuccin/alacritty/archive/refs/heads/main.zip"
+refreshPeriod = "168h"
+include = ["**/catppuccin-*.toml"]
+stripComponents = 1
+{{ end }}
