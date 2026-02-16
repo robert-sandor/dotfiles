@@ -1,8 +1,131 @@
-include "./cfg/autostart.kdl"
-include "./cfg/keybinds.kdl"
-include "./cfg/input.kdl"
-include "./cfg/display/{{ .chezmoi.hostname }}.kdl"
-include "./cfg/layout.kdl"
-include "./cfg/rules.kdl"
-include "./cfg/misc.kdl"
+// Input - https://github.com/YaLTeR/niri/wiki/Configuration:-Input
+input {
+  keyboard {
+    xkb {
+      layout "us" // Use the American keyboard layout
+      options "caps:escape" // Make caps lock a second escape key
+    }
+    numlock // Enable numlock on startup
+    repeat-delay 200
+    repeat-rate 25
+  }
 
+  touchpad {
+    natural-scroll // Enable natural (macOS-style) scrolling
+    scroll-factor 0.25 // Reduce scrolling speed
+  }
+
+  mouse {
+    accel-profile "flat" // Disable mouse acceleration
+  }
+
+  workspace-auto-back-and-forth // Enable workspace back & forth switching
+}
+
+// Switch events - https://github.com/niri-wm/niri/wiki/Configuration:-Switch-Events
+// todo - figure out how to handle laptop lid closing to go to sleep
+
+
+// Layout - https://github.com/niri-wm/niri/wiki/Configuration:-Layout
+layout {
+  gaps 16
+  center-focused-column "on-overflow" // Center focused window if it doesn't fit on screen together with the previously focused column.
+  always-center-single-column
+
+  preset-column-widths {
+    proportion 0.33333
+    proportion 0.5
+    proportion 0.66667
+  }
+
+  default-column-width { proportion 0.5; }
+
+  preset-window-heights { proportion 0.5; }
+
+  border { off; }
+
+  focus-ring {
+    width 2
+    active-color "#fab387"
+    urgent-color "#f38ba8"
+  }
+
+  shadow {
+    on
+    softness 16
+    spread 5
+    offset x=5 y=0
+    color "rgba(17, 17, 27, 0.9)"
+    inactive-color "rgba(17, 17, 27, 0.6)"
+  }
+
+  insert-hint { color "#fab38780"; }
+
+  background-color "transparent" // needed to allow other programs to set wallpapers
+}
+
+// Miscellaneous - https://github.com/niri-wm/niri/wiki/Configuration:-Miscellaneous
+// Startup apps
+spawn-sh-at-startup "/usr/lib/polkit-kde-authentication-agent-1 &"
+spawn-sh-at-startup "qs -c noctalia-shell"
+
+prefer-no-csd // tell windows to not draw client-side decorations
+screenshot-path null // disables saving screenshots to disk, will only copy to clipboard
+
+// todo - figure out why these env variables are set and if we want to keep them
+environment {
+  ELECTRON_OZONE_PLATFORM_HINT "auto"
+  QT_QPA_PLATFORM "wayland"
+  QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
+  XDG_SESSION_TYPE "wayland"
+  XDG_CURRENT_DESKTOP "niri"
+  QT_QPA_PLATFORMTHEME "gtk3"
+}
+
+cursor { hide-when-typing; }
+
+overview {
+  zoom 0.75
+  workspace-shadow { off; }
+}
+
+hotkey-overlay { skip-at-startup; } // Don't show the hotkey overlay on startup
+
+// Window rules - https://github.com/niri-wm/niri/wiki/Configuration:-Window-Rules
+window-rule {
+  geometry-corner-radius 8 // Set every window radius to 8
+  clip-to-geometry true
+}
+
+// Layer rules - https://github.com/niri-wm/niri/wiki/Configuration:-Layer-Rules
+layer-rule {
+  match namespace="^noctalia-wallpaper*"
+  place-within-backdrop true
+}
+
+// Animations - https://github.com/niri-wm/niri/wiki/Configuration:-Animations
+animations { slowdown 0.5; } // Speed up animations 2x from default
+
+// Recent windows - https://github.com/niri-wm/niri/wiki/Configuration:-Recent-Windows
+recent-windows {
+  highlight {
+    corner-radius 8
+    padding 16
+    active-color "#fab387"
+    urgent-color "#f38ba8"
+  }
+}
+
+// Debug options - https://github.com/niri-wm/niri/wiki/Configuration:-Debug-Options
+debug {
+  // Allows notification actions and window activation from Noctalia.
+  honor-xdg-activation-with-invalid-serial
+}
+
+
+// ────────────── Startup Applications ──────────────
+// https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous#spawn-sh-at-startup
+include "keybinds.kdl"
+
+// Include any host specific overrides
+include "./overrides/{{ .chezmoi.hostname }}.kdl"
