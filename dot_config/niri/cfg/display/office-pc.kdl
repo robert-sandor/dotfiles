@@ -1,11 +1,5 @@
-// ────────────── Output Configuration ──────────────
-// You can run `niri msg outputs` to get the correct name for your displays.
-// You will have to remove "/-" and edit it before it takes effect.
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
-
-output "DP-1" {
-    // mode "3840x1600@143.998" // Set resolution and refresh rate
+output "LG Electronics LG HDR WQHD+ 301NTUW30230" {
     variable-refresh-rate
-    scale 1.2 // No scaling (use 2 for HiDPI)
-    // scale 2 // No scaling (use 2 for HiDPI)
+    scale 1.2
 }
