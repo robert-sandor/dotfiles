@@ -5,6 +5,7 @@ input {
     keyboard {
         xkb {
             layout "us" // Use the American keyboard layout
+            options "caps:escape"
         }
         numlock // Enable numlock on startup
         repeat-delay 200
