@@ -1,0 +1,4 @@
+[".config/eza/theme.yml"]
+type = "file"
+url = "https://raw.githubusercontent.com/eza-community/eza-themes/refs/heads/main/themes/catppuccin-mocha.yml"
+refreshPeriod = "168h"
