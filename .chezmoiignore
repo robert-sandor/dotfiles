@@ -2,6 +2,11 @@
 .config/Brewfile
 {{ end }}
 
+{{ if ne .chezmoi.os "linux" }}
+.config/niri
+.config/noctalia
+{{ end }}
+
 {{ if .headless }}
 .ideavimrc
 .config/ghostty

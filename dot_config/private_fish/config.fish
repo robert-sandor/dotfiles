@@ -46,6 +46,7 @@ end
 command -q zoxide; and zoxide init fish | source
 command -q starship; and starship init fish | source
 command -q mise; and mise activate fish | source
+command -q eza; and set -gx EZA_CONFIG_DIR ~/.config/eza
 
 command -q rg; and set -gx RIPGREP_CONFIG_PATH ~/.config/ripgreprc
 
