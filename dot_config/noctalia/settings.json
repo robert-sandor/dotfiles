@@ -39,13 +39,13 @@
     "bar": {
         "autoHideDelay": 500,
         "autoShowDelay": 150,
-        "backgroundOpacity": 0.93,
-        "barType": "floating",
+        "backgroundOpacity": 1,
+        "barType": "simple",
         "capsuleColorKey": "none",
         "capsuleOpacity": 1,
         "density": "default",
         "displayMode": "always_visible",
-        "floating": true,
+        "floating": false,
         "frameRadius": 12,
         "frameThickness": 8,
         "hideOnOverview": false,
@@ -53,7 +53,7 @@
         "marginVertical": 4,
         "monitors": [
         ],
-        "outerCorners": true,
+        "outerCorners": false,
         "position": "top",
         "screenOverrides": [
         ],
