@@ -2,6 +2,15 @@
 output "eDP-1" {
   variable-refresh-rate
   scale 2
+
+  layout {
+    preset-column-widths {
+      proportion 0.5
+      proportion 1.0
+    }
+
+    default-column-width { proportion 1.0; }
+  }
 }
 
 output "LG Electronics LG HDR WQHD+ 301NTUW30230" {
