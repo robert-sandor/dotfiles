@@ -1,3 +1,5 @@
+.config/niri/outputs
+
 {{ if ne .osid "darwin" }}
 .config/Brewfile
 {{ end }}

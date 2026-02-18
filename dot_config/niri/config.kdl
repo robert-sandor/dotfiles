@@ -30,7 +30,7 @@ input {
 
 // Layout - https://github.com/niri-wm/niri/wiki/Configuration:-Layout
 layout {
-  gaps 16
+  gaps 4
   center-focused-column "on-overflow" // Center focused window if it doesn't fit on screen together with the previously focused column.
   always-center-single-column
 
@@ -44,22 +44,14 @@ layout {
 
   preset-window-heights { proportion 0.5; }
 
-  border { off; }
-
-  focus-ring {
+  border {
+    on
     width 2
     active-color "#fab387"
     urgent-color "#f38ba8"
   }
 
-  shadow {
-    on
-    softness 16
-    spread 5
-    offset x=5 y=0
-    color "rgba(17, 17, 27, 0.9)"
-    inactive-color "rgba(17, 17, 27, 0.6)"
-  }
+  focus-ring { off; }
 
   insert-hint { color "#fab38780"; }
 
@@ -69,7 +61,7 @@ layout {
 // Miscellaneous - https://github.com/niri-wm/niri/wiki/Configuration:-Miscellaneous
 // Startup apps
 spawn-sh-at-startup "/usr/lib/polkit-kde-authentication-agent-1 &"
-spawn-sh-at-startup "qs -c noctalia-shell"
+// spawn-sh-at-startup "qs -c noctalia-shell"
 
 prefer-no-csd // tell windows to not draw client-side decorations
 screenshot-path null // disables saving screenshots to disk, will only copy to clipboard
@@ -95,13 +87,19 @@ hotkey-overlay { skip-at-startup; } // Don't show the hotkey overlay on startup
 
 // Window rules - https://github.com/niri-wm/niri/wiki/Configuration:-Window-Rules
 window-rule {
-  geometry-corner-radius 8 // Set every window radius to 8
+  geometry-corner-radius 12
   clip-to-geometry true
+  draw-border-with-background false
 }
 
 // Layer rules - https://github.com/niri-wm/niri/wiki/Configuration:-Layer-Rules
 layer-rule {
-  match namespace="^noctalia-wallpaper*"
+  match namespace="^quickshell$"
+  place-within-backdrop true
+}
+
+layer-rule {
+  match namespace="dms:blurwallpaper"
   place-within-backdrop true
 }
 
@@ -111,8 +109,7 @@ animations { slowdown 0.5; } // Speed up animations 2x from default
 // Recent windows - https://github.com/niri-wm/niri/wiki/Configuration:-Recent-Windows
 recent-windows {
   highlight {
-    corner-radius 8
-    padding 16
+    corner-radius 12
     active-color "#fab387"
     urgent-color "#f38ba8"
   }
@@ -129,5 +126,11 @@ debug {
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous#spawn-sh-at-startup
 include "keybinds.kdl"
 
+// DMS config files
+// include "./dms/colors.kdl"
+// include "./dms/layout.kdl"
+// include "./dms/alttab.kdl"
+// include "./dms/binds.kdl"
+
 // Include any host specific overrides
-include "./overrides/{{ .chezmoi.hostname }}.kdl"
+include "./outputs.kdl"

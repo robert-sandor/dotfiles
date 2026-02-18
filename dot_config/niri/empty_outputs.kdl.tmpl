@@ -1,0 +1,5 @@
+{{- if eq .chezmoi.hostname "office-pc" -}}
+{{-   include "./dot_config/niri/outputs/office-pc.kdl" -}}
+{{- else if eq .chezmoi.hostname "framework" -}}
+{{-   include "./dot_config/niri/outputs/framework.kdl" -}}
+{{- end -}}
