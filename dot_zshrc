@@ -7,9 +7,3 @@ elif test -f /home/linuxbrew/.linuxbrew/bin/brew; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
-# start fish if not the parent process, there's no execution string (i.e. zsh -c "echo hello") and it's the first level of shell
-if ps -o comm -p $PPID | grep -qv fish; then
-  if [[ -z "${ZSH_EXECUTION_STRING}" && "$SHLVL" == 1 ]]; then
-    exec fish
-  fi
-fi

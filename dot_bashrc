@@ -17,8 +17,3 @@ if test -f /opt/homebrew/bin/brew; then
 elif test -f /home/linuxbrew/.linuxbrew/bin/brew; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
-
-# start fish if not the parent process, is first shell level and is not 'dumb' terminal
-if ps -o comm -p $PPID | grep -qv fish && [[ "${SHLVL}" == "1" ]] && [[ "${TERM}" != "dumb" ]]; then
-  exec fish
-fi
