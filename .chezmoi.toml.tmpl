@@ -20,6 +20,11 @@
 {{-   $fontSize = 14 -}}
 {{- end -}}
 
+{{- $shell := env "SHELL" -}}
+{{- if findExecutable "fish" (list "/opt/homebrew/bin" "/home/linuxbrew/.linuxbrew/bin" "/usr/bin" ) -}}
+{{-   $shell = findExecutable "fish" (list "/opt/homebrew/bin" "/home/linuxbrew/.linuxbrew/bin" "/usr/bin" ) -}}
+{{- end -}}
+
 [data]
 email = {{ $email | quote }}
 name = {{ $name | quote }}
@@ -27,6 +32,7 @@ headless = {{ $headless }}
 font = {{ $font | quote }}
 fontSize = {{ $fontSize }}
 osid = {{ $osID | quote }}
+shell = {{ $shell | quote }}
 
 [diff]
 command = "delta"

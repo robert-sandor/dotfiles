@@ -17,5 +17,8 @@ vi_mode_style = "Block"
 [mouse]
 hide_when_typing = true
 
+[terminal]
+shell = {{ .shell | quote }}
+
 [general]
 import = ["~/.config/alacritty/themes/catppuccin-mocha.toml"]
