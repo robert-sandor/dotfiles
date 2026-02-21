@@ -5,14 +5,10 @@ if not status --is-interactive
   exit
 end
 
-fish_vi_key_bindings
+# Setup PATH
+fish_add_path ~/.local/bin
 
-fish_config theme choose "Catppuccin Mocha"
-
-set -gx SHELL (which fish)
-set -gx EDITOR nvim
-set -gx MANPAGER "nvim +Man!"
-
+# Setup ENV
 set -gx BAT_THEME_DARK "Catppuccin Mocha"
 set -gx BAT_THEME_LIGHT "Catppuccin Latte"
 
@@ -20,7 +16,7 @@ set -gx EZA_CONFIG_DIR ~/.config/eza
 
 set -gx RIPGREP_CONFIG_PATH ~/.config/ripgreprc
 
-# Homebrew
+# Setup homebrew if installed
 for brew_prefix in /opt/homebrew /home/linuxbrew/.linuxbrew ~/.linuxbrew
   if test -x "$f/bin/brew"
     $brew_prefix/bin/brew shellenv fish | source
@@ -33,9 +29,27 @@ for brew_prefix in /opt/homebrew /home/linuxbrew/.linuxbrew ~/.linuxbrew
   end
 end
 
+# Setup other utilities if installed
+if command -q nvim
+  set -gx EDITOR nvim
+  set -gx MANPAGER "nvim +Man!"
+end
+
 if command -q fzf
   set -gx FZF_DEFAULT_OPTS_FILE ~/.config/fzfrc
   fzf --fish | source
+end
+
+if command -q starship
+  starship init fish | source
+end
+
+if command -q zoxide
+  zoxide init fish | source
+end
+
+if command -q mise
+  mise activate fish | source
 end
 
 if command -q carapace
@@ -49,16 +63,11 @@ if command -q bw
   trap 'test -n "$BW_SESSION"; and bw lock' EXIT
 end
 
-command -q zoxide; and zoxide init fish | source
-command -q starship; and starship init fish | source
-command -q mise; and mise activate fish | source
-
 # abbreviations
 abbr -a sshconf 'cd $HOME/.ssh; nvim config; cd -'
 abbr -a sshpub 'cat $HOME/.ssh/id_ed25519.pub'
 
-# make bitwarden the ssh agent
-# Possible locations are for: macos appstore, linux flatpak, macos dmg and linux package
+# Bitwarden as SSH Agent
 set -l bw_socket_locations \
   ~/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock \
   ~/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock \
@@ -70,3 +79,7 @@ for socket in $bw_socket_locations
     break
   end
 end
+
+fish_vi_key_bindings
+
+fish_config theme choose "Catppuccin Mocha"
