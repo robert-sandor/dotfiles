@@ -13,16 +13,22 @@ set -gx SHELL (which fish)
 set -gx EDITOR nvim
 set -gx MANPAGER "nvim +Man!"
 
+set -gx BAT_THEME_DARK "Catppuccin Mocha"
+set -gx BAT_THEME_LIGHT "Catppuccin Latte"
+
+set -gx EZA_CONFIG_DIR ~/.config/eza
+
+set -gx RIPGREP_CONFIG_PATH ~/.config/ripgreprc
+
 # Homebrew
-for f in /opt/homebrew/bin /home/linuxbrew/.linuxbrew/bin
-  if test -d "$f" && test -x "$f/brew"
-    $f/brew shellenv fish | source
+for brew_prefix in /opt/homebrew /home/linuxbrew/.linuxbrew ~/.linuxbrew
+  if test -x "$f/bin/brew"
+    $brew_prefix/bin/brew shellenv fish | source
 
     set -gx HOMEBREW_BUNDLE_FILE ~/.config/Brewfile
+
     abbr -a brewfile "chezmoi edit -a --watch $HOMEBREW_BUNDLE_FILE"
     abbr -a brewup "brew bundle install --cleanup"
-    # todo: reconsider this
-    command -q rustup; and fish_add_path (brew --prefix rustup)/bin
     break
   end
 end
@@ -46,12 +52,21 @@ end
 command -q zoxide; and zoxide init fish | source
 command -q starship; and starship init fish | source
 command -q mise; and mise activate fish | source
-command -q eza; and set -gx EZA_CONFIG_DIR ~/.config/eza
-
-command -q rg; and set -gx RIPGREP_CONFIG_PATH ~/.config/ripgreprc
 
 # abbreviations
-source "$__fish_config_dir/abbrs.fish"
+abbr -a sshconf 'cd $HOME/.ssh; nvim config; cd -'
+abbr -a sshpub 'cat $HOME/.ssh/id_ed25519.pub'
 
 # make bitwarden the ssh agent
-set_bitwarden_ssh_agent
+# Possible locations are for: macos appstore, linux flatpak, macos dmg and linux package
+set -l bw_socket_locations \
+  ~/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock \
+  ~/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock \
+  ~/.bitwarden-ssh-agent.sock
+
+for socket in $bw_socket_locations
+  if test -S $socket
+    set -gx SSH_AUTH_SOCK "$socket"
+    break
+  end
+end
