@@ -9,6 +9,8 @@ end
 fish_add_path ~/.local/bin
 
 # Setup ENV
+set -gx SHELL (which fish)
+
 set -gx BAT_THEME_DARK "Catppuccin Mocha"
 set -gx BAT_THEME_LIGHT "Catppuccin Latte"
 
@@ -55,12 +57,6 @@ end
 if command -q carapace
   set -gx CARAPACE_BRIDGES 'zsh,fish,bash,inshellisense'
   carapace _carapace | source
-end
-
-if command -q bw
-  abbr -a bwopen 'set -x BW_SESSION (bw unlock --raw)'
-  abbr -a bwlock 'bw lock; set -e BW_SESSION'
-  trap 'test -n "$BW_SESSION"; and bw lock' EXIT
 end
 
 # abbreviations
