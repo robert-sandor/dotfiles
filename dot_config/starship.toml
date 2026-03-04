@@ -5,8 +5,9 @@ right_format = "$custom"
 description = "show status of dotfile sync with chezmoi"
 command = "echo dotfiles"
 when = ''' command -q chezmoi && test -n "$(chezmoi status)"'''
-symbol = "!"
+symbol = "! "
 style = "dimmed red"
+ignore_timeout = true
 
 [custom.bitwarden]
 description = "show status of bitwarden-cli"
