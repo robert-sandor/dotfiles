@@ -78,4 +78,4 @@ end
 
 fish_vi_key_bindings
 
-fish_config theme choose "Catppuccin Mocha"
+fish_config theme choose "catppuccin-mocha"
