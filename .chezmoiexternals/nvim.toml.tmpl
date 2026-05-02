@@ -1,8 +1,6 @@
-[".config/nvim"]
-type = "git-repo"
-{{ if .headless }}
-url = "https://github.com/robert-sandor/nvim.git"
-{{ else }}
-url = "git@github.com:robert-sandor/nvim.git"
+{{ if eq .chezmoi.os "linux" }}
+[".local/share"]
+type = "archive"
+url = "https://github.com/neovim/neovim/releases/download/{{ .neovim_version }}/nvim-linux-x86_64.tar.gz"
+refreshPeriod = "168h"
 {{ end }}
-refreshPeriod = "24h"

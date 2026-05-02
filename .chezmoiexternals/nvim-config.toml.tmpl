@@ -1,0 +1,8 @@
+[".config/nvim"]
+type = "git-repo"
+{{ if .headless }}
+url = "https://github.com/robert-sandor/nvim.git"
+{{ else }}
+url = "git@github.com:robert-sandor/nvim.git"
+{{ end }}
+refreshPeriod = "24h"
