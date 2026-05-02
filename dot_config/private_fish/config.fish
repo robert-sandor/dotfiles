@@ -11,13 +11,6 @@ fish_add_path ~/.local/bin
 # Setup ENV
 set -gx SHELL (which fish)
 
-set -gx BAT_THEME_DARK "Catppuccin Mocha"
-set -gx BAT_THEME_LIGHT "Catppuccin Latte"
-
-set -gx EZA_CONFIG_DIR ~/.config/eza
-
-set -gx RIPGREP_CONFIG_PATH ~/.config/ripgreprc
-
 # Setup homebrew if installed
 for brew_prefix in /opt/homebrew /home/linuxbrew/.linuxbrew ~/.linuxbrew
     if test -x "$f/bin/brew"
@@ -59,7 +52,28 @@ if command -q carapace
     carapace _carapace | source
 end
 
-# abbreviations
+if command -q eza
+    set -gx EZA_CONFIG_DIR ~/.config/eza
+    set -gx EZA_ICONS auto
+
+    abbr -a l eza
+    abbr -a la eza -al
+    abbr -a ll eza -l
+    abbr -a tree eza --tree
+end
+
+if command -q bat
+    set -gx BAT_THEME_DARK "Catppuccin Mocha"
+    set -gx BAT_THEME_LIGHT "Catppuccin Latte"
+
+    abbr -a cat bat -p
+end
+
+if command -q rg
+    set -gx RIPGREP_CONFIG_PATH ~/.config/ripgreprc
+end
+
+# Other abbreviations
 abbr -a sshconf 'cd $HOME/.ssh; nvim config; cd -'
 abbr -a sshpub 'cat $HOME/.ssh/id_ed25519.pub'
 
@@ -76,10 +90,8 @@ for socket in $bw_socket_locations
     end
 end
 
-if test -f ~/.aliases
-    source ~/.aliases
-end
-
+# Enable Vi keybinds
 fish_vi_key_bindings
 
+# Set theme
 fish_config theme choose catppuccin-mocha

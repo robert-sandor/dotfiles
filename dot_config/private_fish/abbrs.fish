@@ -1,1 +1,0 @@
-# some ssh goodies
