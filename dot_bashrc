@@ -1,19 +1,50 @@
 #!/usr/bin/env bash
 
 # Source global definitions
-if [ -f /etc/bashrc ]; then
+if [ -f /etc/bashrc ]; then # Fedora
   . /etc/bashrc
+elif [ -f /etc/bash.bashrc ]; then # Debian
+  . /etc/bash.bashrc
 fi
 
-# User specific environment
+# Exit if not interactive
+case $- in
+*i*) ;;
+*) return ;;
+esac
+
+# Include user bins
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
   PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 fi
 export PATH
 
-# if homebrew is installed (likely on macos) load its shellenv to be able to start fish
-if test -f /opt/homebrew/bin/brew; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-elif test -f /home/linuxbrew/.linuxbrew/bin/brew; then
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# History settings
+HISTCONTROL=ignoreboth
+shopt -s histappend
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# Shell options
+shopt -s checkwinsize
+
+# Load aliases
+if [ -f ~/.aliases ]; then
+  . ~/.aliases
+fi
+
+# Drop into fish if available
+if command -v fish &>/dev/null; then
+  if [[ $(ps --no-header --pid=$PPID --format=comm) != "fish" && ${SHLVL} == 1 ]]; then
+    exec fish
+  fi
+fi
+
+# Load bash completion
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
 fi
