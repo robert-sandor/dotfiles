@@ -78,12 +78,9 @@ abbr -a sshconf 'nvim ~/.ssh/config'
 abbr -a sshpub 'cat $HOME/.ssh/id_ed25519.pub'
 
 # Bitwarden as SSH Agent
-set -l bw_socket_locations \
-    ~/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock \
+for socket in ~/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock \
     ~/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock \
     ~/.bitwarden-ssh-agent.sock
-
-for socket in $bw_socket_locations
     if test -S $socket
         set -gx SSH_AUTH_SOCK "$socket"
         break
