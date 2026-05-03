@@ -28,11 +28,6 @@ HISTFILESIZE=2000
 # Shell options
 shopt -s checkwinsize
 
-# Load aliases
-if [ -f ~/.aliases ]; then
-  . ~/.aliases
-fi
-
 # Drop into fish if available
 if command -v fish &>/dev/null; then
   if [[ $(ps --no-header --pid=$PPID --format=comm) != "fish" && ${SHLVL} == 1 ]]; then
@@ -48,3 +43,56 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+# External command specific configs
+if command -v nvim >/dev/null 2>&1; then
+  export EDITOR=nvim
+  export MANPAGER="nvim +Man!"
+fi
+
+if command -v fzf >/dev/null 2>&1; then
+  export FZF_DEFAULT_OPTS_FILE=~/.config/fzfrc
+  eval "$(fzf --bash)"
+fi
+
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init bash)"
+fi
+
+if command -v mise >/dev/null 2>&1; then
+  eval "$(mise activate bash)"
+fi
+
+if command -v carapace >/dev/null 2>&1; then
+  export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
+  source <(carapace _carapace)
+fi
+
+if command -v eza >/dev/null 2>&1; then
+  export EZA_CONFIG_DIR=~/.config/eza
+  export EZA_ICONS_AUTO=true
+
+  alias l='eza'
+  alias la='eza -al'
+  alias ll='eza -l'
+  alias tree='eza --tree'
+else
+  alias ls='ls --color=auto'
+  alias l='ls --color=auto'
+  alias la='ls -Al --color=auto'
+  alias ll='ls -l --color=auto'
+fi
+
+if command -v bat >/dev/null 2>&1; then
+  export BAT_THEME_DARK="Catppuccin Mocha"
+  export BAT_THEME_LIGHT="Catppuccin Latte"
+
+  alias cat='bat -p'
+fi
+
+if command -v rg >/dev/null 2>&1; then
+  export RIPGREP_CONFIG_PATH=~/.config/ripgreprc
+fi
+
+alias sshconf='nvim ~/.ssh/config'
+alias sshpub='cat ~/.ssh/id_ed25519.pub'

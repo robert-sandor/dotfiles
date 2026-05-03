@@ -54,7 +54,7 @@ end
 
 if command -q eza
     set -gx EZA_CONFIG_DIR ~/.config/eza
-    set -gx EZA_ICONS auto
+    set -gx EZA_ICONS_AUTO true
 
     abbr -a l eza
     abbr -a la eza -al
@@ -74,7 +74,7 @@ if command -q rg
 end
 
 # Other abbreviations
-abbr -a sshconf 'cd $HOME/.ssh; nvim config; cd -'
+abbr -a sshconf 'nvim ~/.ssh/config'
 abbr -a sshpub 'cat $HOME/.ssh/id_ed25519.pub'
 
 # Bitwarden as SSH Agent
