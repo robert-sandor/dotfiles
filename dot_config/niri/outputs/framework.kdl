@@ -1,5 +1,8 @@
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
-output "eDP-1" {
+
+// Internal display
+output "BOE NE135A1M-NY1 Unknown" {
+  mode "2880x1920@120.000"
   variable-refresh-rate
   scale 2
 
@@ -13,6 +16,21 @@ output "eDP-1" {
   }
 }
 
-output "LG Electronics LG HDR WQHD+ 301NTUW30230" {
-  scale 1.2
+// external Asus 5K display
+output "ASUSTek COMPUTER INC XG27JCG TBLMQS083924" {
+  mode "5120x2880@119.994"
+  variable-refresh-rate
+  scale 2
+  focus-at-startup
+
+  layout {
+    preset-column-widths {
+      proportion 0.25
+      proportion 0.5
+      proportion 0.75
+      proportion 1.0
+    }
+
+    default-column-width { proportion 0.75; }
+  }
 }
