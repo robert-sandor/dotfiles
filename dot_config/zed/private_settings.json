@@ -10,38 +10,43 @@
   "project_panel": {
     "dock": "left"
   },
+  "terminal": {
+    "shell": {
+      "program": "fish"
+    }
+  },
   "telemetry": {
     "diagnostics": false,
-    "metrics": false,
+    "metrics": false
   },
   "title_bar": {
-    "show_sign_in": false,
+    "show_sign_in": false
   },
   "git": {
     "inline_blame": {
-      "enabled": false,
-    },
+      "enabled": false
+    }
   },
   "completions": {
-    "words": "enabled",
+    "words": "enabled"
   },
   "show_edit_predictions": false,
   "diagnostics": {
     "inline": {
-      "enabled": true,
-    },
+      "enabled": true
+    }
   },
   "colorize_brackets": false,
   "inlay_hints": {
-    "enabled": false,
+    "enabled": false
   },
   "indent_guides": {
     "background_coloring": "disabled",
-    "coloring": "fixed",
+    "coloring": "fixed"
   },
   "gutter": {
     "min_line_number_digits": 4,
-    "runnables": true,
+    "runnables": true
   },
   "relative_line_numbers": "enabled",
   "ui_font_family": ".ZedSans",
@@ -52,14 +57,14 @@
   "vim_mode": true,
   "vim": {
     "use_system_clipboard": "never",
-    "use_smartcase_find": true,
+    "use_smartcase_find": true
   },
   "ui_font_size": 16.0,
   "buffer_font_size": 14.0,
   "theme": {
     "mode": "system",
     "light": "Catppuccin Frappe",
-    "dark": "Catppuccin Mocha",
+    "dark": "Catppuccin Mocha"
   },
   "auto_install_extensions": {
     "ansible": true,
@@ -70,7 +75,7 @@
     "dockerfile": true,
     "fish": true,
     "tombi": true,
-    "toml": true,
+    "toml": true
   },
   "file_types": {
     "Ansible": [
@@ -89,7 +94,7 @@
       "**/playbooks/*.yaml",
       "**/playbooks/*.yml",
       "**playbook*.yaml",
-      "**playbook*.yml",
-    ],
-  },
+      "**playbook*.yml"
+    ]
+  }
 }
