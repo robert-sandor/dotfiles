@@ -1,67 +1,37 @@
 // Input - https://github.com/YaLTeR/niri/wiki/Configuration:-Input
 input {
   keyboard {
-    xkb {
-      layout "us" // Use the American keyboard layout
-      options "caps:escape" // Make caps lock a second escape key
-    }
-    numlock // Enable numlock on startup
+    xkb { layout "us"; options "caps:escape"; }
     repeat-delay 200
-    repeat-rate 25
   }
-
-  touchpad {
-    natural-scroll // Enable natural (macOS-style) scrolling
-    scroll-factor 0.25 // Reduce scrolling speed
-    dwt
-    click-method "clickfinger"
-  }
-
-  mouse {
-    accel-profile "flat" // Disable mouse acceleration
-  }
-
-  workspace-auto-back-and-forth // Enable workspace back & forth switching
+  mouse { accel-profile "flat"; } // Disable mouse acceleration
+  touchpad { natural-scroll; scroll-factor 0.5; dwt; click-method "clickfinger"; }
 }
 
 // Switch events - https://github.com/niri-wm/niri/wiki/Configuration:-Switch-Events
 // todo - figure out how to handle laptop lid closing to go to sleep
-
+switch-events { lid-close { spawn "noctalia msg session lock"; }; }
 
 // Layout - https://github.com/niri-wm/niri/wiki/Configuration:-Layout
 layout {
   gaps 4
   center-focused-column "on-overflow" // Center focused window if it doesn't fit on screen together with the previously focused column.
   always-center-single-column
-
-  preset-column-widths {
-    proportion 0.33333
-    proportion 0.5
-    proportion 0.66667
-  }
-
+  preset-column-widths { proportion 0.25; proportion 0.5; proportion 0.75; }
   default-column-width { proportion 0.5; }
-
   preset-window-heights { proportion 0.5; }
-
-  border {
-    on
-    width 2
-    active-color "#fab387"
-    urgent-color "#f38ba8"
-  }
-
+  border { on; width 2; active-color "#89b4fa"; inactive-color "#b4befe80"; urgent-color "#f38ba8"; }
+  shadow { on; }
   focus-ring { off; }
-
-  insert-hint { color "#fab38780"; }
-
+  insert-hint { on; color "#89b4fa80"; }
   background-color "transparent" // needed to allow other programs to set wallpapers
 }
 
 // Miscellaneous - https://github.com/niri-wm/niri/wiki/Configuration:-Miscellaneous
 // Startup apps
-spawn-sh-at-startup "/usr/lib/polkit-kde-authentication-agent-1 &"
-// spawn-sh-at-startup "qs -c noctalia-shell"
+spawn-at-startup "/usr/lib/polkit-kde-authentication-agent-1"
+spawn-at-startup "/usr/lib/polkit-1/polkit-agent-helper-1"
+spawn-at-startup "noctalia"
 
 prefer-no-csd // tell windows to not draw client-side decorations
 screenshot-path null // disables saving screenshots to disk, will only copy to clipboard
@@ -94,13 +64,18 @@ window-rule {
 }
 
 // Layer rules - https://github.com/niri-wm/niri/wiki/Configuration:-Layer-Rules
-layer-rule {
-  match namespace="^quickshell$"
-  place-within-backdrop true
-}
+// layer-rule {
+//   match namespace="^quickshell$"
+//   place-within-backdrop true
+// }
+//
+// layer-rule {
+//   match namespace="dms:blurwallpaper"
+//   place-within-backdrop true
+// }
 
 layer-rule {
-  match namespace="dms:blurwallpaper"
+  match namespace="^noctalia-backdrop"
   place-within-backdrop true
 }
 
