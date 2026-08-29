@@ -15,7 +15,7 @@
 {{-   $osID = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
 {{- end -}}
 
-{{- $fontSize := 11 -}}
+{{- $fontSize := 10 -}}
 {{- if eq .chezmoi.os "darwin" -}}
 {{-   $fontSize = 14 -}}
 {{- end -}}
@@ -33,7 +33,7 @@ font = {{ $font | quote }}
 fontSize = {{ $fontSize }}
 osid = {{ $osID | quote }}
 shell = {{ $shell | quote }}
-neovim_version = "v0.12.2"
+neovim_version = "v0.12.5"
 
 [diff]
 command = "delta"
