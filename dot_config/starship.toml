@@ -1,6 +1,13 @@
 "$schema" = "https://starship.rs/config-schema.json"
 right_format = "$custom"
 
+[shell]
+disabled = false
+bash_indicator = "bash"
+zsh_indicator = "zsh"
+fish_indicator = "fish"
+style = "bold dimmed white"
+
 [custom.bitwarden]
 description = "show status of bitwarden-cli"
 command = "echo bw"

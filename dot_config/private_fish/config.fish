@@ -5,11 +5,9 @@ if not status --is-interactive
     exit
 end
 
-# Setup PATH
-fish_add_path ~/.local/bin
-
-# Setup ENV
-set -gx SHELL (which fish)
+fish_vi_key_bindings
+fish_config theme choose catppuccin-mocha
+fish_add_path ~/.local/bin ~/bin
 
 # Setup homebrew if installed
 for brew_prefix in /opt/homebrew /home/linuxbrew/.linuxbrew ~/.linuxbrew
@@ -76,19 +74,3 @@ end
 # Other abbreviations
 abbr -a sshconf 'nvim ~/.ssh/config'
 abbr -a sshpub 'cat $HOME/.ssh/id_ed25519.pub'
-
-# Bitwarden as SSH Agent
-for socket in ~/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock \
-    ~/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock \
-    ~/.bitwarden-ssh-agent.sock
-    if test -S $socket
-        set -gx SSH_AUTH_SOCK "$socket"
-        break
-    end
-end
-
-# Enable Vi keybinds
-fish_vi_key_bindings
-
-# Set theme
-fish_config theme choose catppuccin-mocha

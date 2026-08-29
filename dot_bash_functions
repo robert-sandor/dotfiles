@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+if command -v bw >/dev/null 2>&1; then
+  bwlock() {
+    if [[ -z "$BW_SESSION" ]]; then
+      return
+    fi
+
+    unset BW_SESSION
+    bw lock
+  }
+
+  bwunlock() {
+    local bw_session
+    bw_session=$(bw unlock --raw)
+    if [[ -z "$bw_session" ]]; then
+      echo "Failed to open vault" >&2
+    else
+      export BW_SESSION="$bw_session"
+      trap bwlock EXIT
+    fi
+  }
+fi
+
+dotfiles() {
+  if ! command -v chezmoi >/dev/null 2>&1; then
+    echo "missing chezmoi" >&2
+  fi
+
+  if [[ -f "$1" ]]; then
+    chezmoi edit -a --watch "$1"
+  else
+    local file
+    file=$(chezmoi managed -i files | fzf -q "$1")
+    [[ -n "$file" ]] && chezmoi edit -a --watch "$HOME/$file"
+  fi
+}
+
+sshrm() {
+  local selected
+  selected=$(cut -d ' ' -f1 ~/.ssh/known_hosts | uniq | fzf-tmux -p -- -q "$1")
+  [[ -n "$selected" ]] && ssh-keygen -R "$selected"
+}
+
