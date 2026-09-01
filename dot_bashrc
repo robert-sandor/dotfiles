@@ -19,6 +19,9 @@ if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
 fi
 export PATH
 
+alias c='clear'
+alias q='exit'
+
 # Setup homebrew if installed
 for brew_prefix in /opt/homebrew /home/linuxbrew/.linuxbrew ~/.linuxbrew; do
   if [ -x "$brew_prefix/bin/brew" ]; then
@@ -50,6 +53,8 @@ fi
 if command -v nvim >/dev/null 2>&1; then
   export EDITOR=nvim
   export MANPAGER="nvim +Man!"
+
+  alias sshconf='nvim ~/.ssh/config'
 fi
 
 if command -v fzf >/dev/null 2>&1; then
@@ -94,6 +99,7 @@ if command -v bat >/dev/null 2>&1; then
   export BAT_THEME_LIGHT="Catppuccin Latte"
 
   alias cat='bat -p'
+  alias sshpub='bat -p ~/.ssh/id_ed25519.pub'
 fi
 
 if command -v rg >/dev/null 2>&1; then
@@ -104,9 +110,6 @@ if command -v brew >/dev/null 2>&1; then
   alias brewfile='chezmoi edit -a --watch $HOMEBREW_BUNDLE_FILE'
   alias brewup='brew bundle install --cleanup'
 fi
-
-alias sshconf='nvim ~/.ssh/config'
-alias sshpub='cat ~/.ssh/id_ed25519.pub'
 
 # Enable Vi keybinds
 set -o vi

@@ -9,6 +9,10 @@ fish_vi_key_bindings
 fish_config theme choose catppuccin-mocha
 fish_add_path ~/.local/bin ~/bin
 
+# Some potentially handy abbrs
+abbr -a c clear
+abbr -a q exit
+
 # Setup homebrew if installed
 for brew_prefix in /opt/homebrew /home/linuxbrew/.linuxbrew ~/.linuxbrew
     if test -x "$f/bin/brew"
@@ -26,6 +30,8 @@ end
 if command -q nvim
     set -gx EDITOR nvim
     set -gx MANPAGER "nvim +Man!"
+
+    abbr -a sshconf 'nvim ~/.ssh/config'
 end
 
 if command -q fzf
@@ -65,12 +71,10 @@ if command -q bat
     set -gx BAT_THEME_LIGHT "Catppuccin Latte"
 
     abbr -a cat bat -p
+
+    abbr -a sshpub 'bat -p $HOME/.ssh/id_ed25519.pub'
 end
 
 if command -q rg
     set -gx RIPGREP_CONFIG_PATH ~/.config/ripgreprc
 end
-
-# Other abbreviations
-abbr -a sshconf 'nvim ~/.ssh/config'
-abbr -a sshpub 'cat $HOME/.ssh/id_ed25519.pub'
