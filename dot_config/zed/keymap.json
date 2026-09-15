@@ -9,32 +9,73 @@
   {
     "context": "EmptyPane || SharedScreen || (Editor && vim_mode == normal)",
     "bindings": {
-      "space space": "file_finder::Toggle",
       "space f": "file_finder::Toggle",
-      "space g g": [
+      "space e": "project_panel::Toggle",
+      "space g": [
         "task::Spawn",
         { "task_name": "Lazygit", "reveal_target": "center" },
       ],
+      "space /": "pane::DeploySearch",
+      "space b": "tab_switcher::Toggle",
+      "space t": "terminal_panel::Toggle",
+      "space r": "editor::Rename",
+      "space a": "editor::ToggleCodeActions",
+      "space =": "editor::Format",
+      "space q": "diagnostics::Deploy",
     },
   },
   {
     "context": "VimControl && !menu",
     "bindings": {
-      "g y": ["workspace::SendKeystrokes", "\" + y"],
+      "space y": ["workspace::SendKeystrokes", "\" + y"],
     },
   },
   {
     "context": "vim_mode == normal && !menu",
     "bindings": {
-      "g p": ["workspace::SendKeystrokes", "\" + p"],
+      "space p": ["workspace::SendKeystrokes", "\" + p"],
     },
   },
   {
     "context": "vim_mode == visual && !menu",
     "bindings": {
-      "g p": ["workspace::SendKeystrokes", "\" + P"],
+      "space p": ["workspace::SendKeystrokes", "\" + P"],
       "<": ["workspace::SendKeystrokes", "< g v"],
       ">": ["workspace::SendKeystrokes", "> g v"],
+    },
+  },
+  {
+    "context": "!Terminal",
+    "bindings": {
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-k": "workspace::ActivatePaneUp",
+    },
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "alt-j": "editor::MoveLineDown",
+      "alt-k": "editor::MoveLineUp",
+      "alt-h": "editor::Outdent",
+      "alt-l": "editor::Indent",
+      "[ b": "pane::ActivatePreviousItem",
+      "] b": "pane::ActivateNextItem",
+    },
+  },
+  {
+    "context": "vim_mode == normal",
+    "bindings": {
+      "s a": ["vim::PushAddSurrounds", {}],
+      "s d": "vim::PushDeleteSurrounds",
+      "s r": ["vim::PushChangeSurrounds", {}],
+    },
+  },
+  {
+    "context": "vim_mode == visual",
+    "bindings": {
+      "s a": ["vim::PushAddSurrounds", {}],
     },
   },
 ]

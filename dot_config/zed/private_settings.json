@@ -51,14 +51,16 @@
     "background_coloring": "disabled",
     "coloring": "fixed",
   },
+  "which_key": {
+    "enabled": true,
+    "delay_ms": 200,
+  },
   "gutter": {
     "min_line_number_digits": 4,
     "runnables": true,
   },
   "relative_line_numbers": "enabled",
-  "ui_font_family": ".ZedSans",
-  "buffer_line_height": "comfortable",
-  "buffer_font_weight": 400.0,
+  "ui_font_family": "JetBrainsMono Nerd Font",
   "buffer_font_family": "JetBrainsMono Nerd Font",
   "icon_theme": "Catppuccin Mocha",
   "vim_mode": true,
@@ -66,7 +68,7 @@
     "use_system_clipboard": "never",
     "use_smartcase_find": true,
   },
-  "ui_font_size": 16.0,
+  "ui_font_size": 14.0,
   "buffer_font_size": 14.0,
   "theme": {
     "mode": "system",
