@@ -1,0 +1,8 @@
+{{- $assetPattern := printf "chezmoi_*_%s_%s.tar.gz" .chezmoi.os .chezmoi.arch -}}
+
+[".local/bin/chezmoi"]
+type = "archive-file"
+url = {{ gitHubLatestReleaseAssetURL "twpayne/chezmoi" $assetPattern | quote }}
+executable = true
+path = "chezmoi"
+refreshPeriod = "168h"

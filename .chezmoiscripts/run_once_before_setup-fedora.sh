@@ -15,7 +15,6 @@ packages=(
   bash
   bat
   btop
-  chezmoi
   du-dust
   eza
   fd-find

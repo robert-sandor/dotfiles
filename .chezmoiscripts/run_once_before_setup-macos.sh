@@ -9,7 +9,6 @@ formulae=(
   bash
   bat
   btop
-  chezmoi
   dust
   eza
   fd
