@@ -1,6 +1,16 @@
-{{ if eq .chezmoi.os "linux" }}
-[".local/share"]
+{{- $osName := "" -}}
+{{- if eq .chezmoi.os "darwin" -}}
+{{-   $osName = "macos" -}}
+{{- else if eq .chezmoi.os "linux" -}}
+{{-   $osName = "linux" -}}
+{{- end -}}
+{{- $archName := .chezmoi.arch -}}
+{{- if eq .chezmoi.arch "amd64" -}}
+{{-   $archName = "x86_64" -}}
+{{- end -}}
+
+[".local/opt/nvim"]
 type = "archive"
-url = "https://github.com/neovim/neovim/releases/download/{{ .neovim_version }}/nvim-linux-x86_64.tar.gz"
+url = "https://github.com/neovim/neovim/releases/download/{{ .neovim_version }}/nvim-{{ $osName }}-{{ $archName }}.tar.gz"
+stripComponents = 1
 refreshPeriod = "168h"
-{{ end }}

@@ -1,0 +1,16 @@
+{{- $assetPattern := "" -}}
+{{- if eq .chezmoi.os "darwin" -}}
+{{-   $assetPattern = "usage-universal-apple-darwin.tar.gz" -}}
+{{- else if eq .chezmoi.os "linux" -}}
+{{-   if eq .chezmoi.arch "arm64" -}}
+{{-     $assetPattern = "usage-aarch64-unknown-linux-gnu.tar.gz" -}}
+{{-   else -}}
+{{-     $assetPattern = "usage-x86_64-unknown-linux-gnu.tar.gz" -}}
+{{-   end -}}
+{{- end -}}
+
+[".local/bin/usage"]
+type = "archive-file"
+url = {{ gitHubLatestReleaseAssetURL "jdx/usage" $assetPattern | quote }}
+executable = true
+path = "usage"

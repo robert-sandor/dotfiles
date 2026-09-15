@@ -35,6 +35,10 @@ osid = {{ $osID | quote }}
 shell = {{ $shell | quote }}
 neovim_version = "v0.12.5"
 
+[scriptEnv]
+OSID = {{ $osID | quote }}
+HEADLESS = "{{ $headless }}"
+
 [diff]
 command = "delta"
 pager = "less -FR"
