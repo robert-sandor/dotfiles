@@ -18,6 +18,8 @@ formulae=(
   fzf
   git
   git-delta
+  git-extras
+  helix
   imagemagick
   lazygit
   lima

@@ -5,7 +5,39 @@ if [[ "$OSID" != "linux-debian" ]]; then
   exit 0
 fi
 
-echo "OS: $OSID"
-echo "Headless: $HEADLESS"
+if [[ "$HEADLESS" != "true" ]]; then
+  exit 0
+fi
 
-# packages + settings TBD, added incrementally
+packages=(
+  bat
+  btop
+  curl
+  du-dust
+  eza
+  fd-find
+  fish
+  fzf
+  git
+  git-delta
+  htop
+  lazygit
+  neovim
+  ripgrep
+  rsync
+  starship
+  tealdeer
+  unzip
+  yazi
+  zoxide
+)
+
+echo "Adding yazi repository..."
+if [[ ! -f /etc/apt/sources.list.d/yazi.list ]]; then
+  curl -fsSL https://yazi-rs.github.io/builds/yazi-keyring.gpg | sudo tee /usr/share/keyrings/yazi-keyring.gpg >/dev/null
+  echo "deb [signed-by=/usr/share/keyrings/yazi-keyring.gpg] https://yazi-rs.github.io/builds/ stable main" | sudo tee /etc/apt/sources.list.d/yazi.list >/dev/null
+fi
+
+echo "Installing packages..."
+sudo apt-get update
+sudo apt-get install -y "${packages[@]}"
