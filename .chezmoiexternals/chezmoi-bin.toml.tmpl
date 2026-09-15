@@ -2,7 +2,6 @@
 
 [".local/bin/chezmoi"]
 type = "archive-file"
-url = {{ gitHubLatestReleaseAssetURL "twpayne/chezmoi" $assetPattern | quote }}
+url = {{ gitHubReleaseAssetURL "twpayne/chezmoi" .chezmoi_version $assetPattern | quote }}
 executable = true
 path = "chezmoi"
-refreshPeriod = "168h"
