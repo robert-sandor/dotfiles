@@ -17,11 +17,6 @@ abbr -a q exit
 for brew_prefix in /opt/homebrew /home/linuxbrew/.linuxbrew ~/.linuxbrew
     if test -x "$f/bin/brew"
         $brew_prefix/bin/brew shellenv fish | source
-
-        set -gx HOMEBREW_BUNDLE_FILE ~/.config/Brewfile
-
-        abbr -a brewfile "chezmoi edit -a --watch $HOMEBREW_BUNDLE_FILE"
-        abbr -a brewup "brew bundle install --cleanup"
         break
     end
 end

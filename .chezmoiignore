@@ -1,10 +1,6 @@
 README.md
 .config/niri/outputs
 
-{{ if ne .osid "darwin" }}
-.config/Brewfile
-{{ end }}
-
 {{ if ne .chezmoi.os "linux" }}
 .config/niri
 .config/noctalia
@@ -17,5 +13,4 @@ README.md
 .config/lazygit
 .config/mise
 .config/posting
-.config/Brewfile
 {{ end }}

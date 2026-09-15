@@ -26,7 +26,6 @@ alias q='exit'
 for brew_prefix in /opt/homebrew /home/linuxbrew/.linuxbrew ~/.linuxbrew; do
   if [ -x "$brew_prefix/bin/brew" ]; then
     eval "$($brew_prefix/bin/brew shellenv bash)"
-    export HOMEBREW_BUNDLE_FILE=~/.config/Brewfile
     break
   fi
 done
@@ -104,11 +103,6 @@ fi
 
 if command -v rg >/dev/null 2>&1; then
   export RIPGREP_CONFIG_PATH=~/.config/ripgreprc
-fi
-
-if command -v brew >/dev/null 2>&1; then
-  alias brewfile='chezmoi edit -a --watch $HOMEBREW_BUNDLE_FILE'
-  alias brewup='brew bundle install --cleanup'
 fi
 
 # Enable Vi keybinds
