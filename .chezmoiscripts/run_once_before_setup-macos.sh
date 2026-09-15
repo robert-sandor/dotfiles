@@ -77,10 +77,10 @@ if [[ $(command -v brew) == "" ]]; then
 fi
 
 echo "Installing formulae..."
-brew install --no-ask --formulae "${formulae[@]}"
+brew install --no-ask --quiet --formulae "${formulae[@]}"
 
 echo "Installing casks..."
-brew install --no-ask --casks "${casks[@]}"
+brew install --no-ask --quiet --casks "${casks[@]}"
 
 echo "Installing Mac Appstore apps..."
 mas install "${appstore_apps[@]}" || echo "mas install failed — check you're signed into the App Store"
