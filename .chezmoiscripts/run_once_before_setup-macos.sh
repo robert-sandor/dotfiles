@@ -5,7 +5,7 @@ if [[ "$OSID" != "darwin" ]]; then
   exit 0
 fi
 
-formulae=(
+common_formulae=(
   bash
   bat
   btop
@@ -21,11 +21,9 @@ formulae=(
   helix
   imagemagick
   lazygit
-  lima
   mas
   mise
   p7zip
-  podman
   ripgrep
   rsync
   starship
@@ -33,32 +31,55 @@ formulae=(
   yazi
   zoxide
 )
+personal_formulae=(
+  lima
+  podman
+)
+work_formulae=(
+)
 
-casks=(
+common_casks=(
   alfred
   appcleaner
-  balenaetcher
   betterdisplay
   claude-code
-  discord
   font-jetbrains-mono-nerd-font
   ghostty
-  helium-browser
   iina
-  jellyfin-media-player
   localsend
+  protonvpn
+  rectangle
+  unnaturalscrollwheels
+  zed
+)
+personal_casks=(
+  balenaetcher
+  discord
+  helium-browser
+  jellyfin-media-player
   nextcloud
   orcaslicer
   proton-mail
-  protonvpn
-  rectangle
   signal
   tailscale-app
   tidal
   todoist-app
-  unnaturalscrollwheels
-  zed
 )
+work_casks=(
+  docker-desktop
+  google-chrome
+  jetbrains-toolbox
+  postman
+  slack
+)
+
+if [[ "$WORK" == "true" ]]; then
+  formulae=("${common_formulae[@]}" "${work_formulae[@]}")
+  casks=("${common_casks[@]}" "${work_casks[@]}")
+else
+  formulae=("${common_formulae[@]}" "${personal_formulae[@]}")
+  casks=("${common_casks[@]}" "${personal_casks[@]}")
+fi
 
 appstore_apps=(
   1530145038 # Amperfy - music player for Navidrome
@@ -82,8 +103,10 @@ brew install --no-ask --quiet --formulae "${formulae[@]}"
 echo "Installing casks..."
 brew install --no-ask --quiet --casks "${casks[@]}"
 
-echo "Installing Mac Appstore apps..."
-mas install "${appstore_apps[@]}" || echo "mas install failed — check you're signed into the App Store"
+if [[ "$WORK" == "false" ]]; then
+  echo "Installing Mac Appstore apps..."
+  mas install "${appstore_apps[@]}" || echo "mas install failed — check you're signed into the App Store"
+fi
 
 ## Settings
 # Dock

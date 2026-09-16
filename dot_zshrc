@@ -99,3 +99,8 @@ bindkey -v
 if [ -f ~/.bash_functions ]; then
   . ~/.bash_functions
 fi
+
+# Local, machine-only config (never managed by chezmoi)
+if [ -f ~/.zshrc.local ]; then
+  . ~/.zshrc.local
+fi

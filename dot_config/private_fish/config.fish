@@ -73,3 +73,8 @@ end
 if command -q rg
     set -gx RIPGREP_CONFIG_PATH ~/.config/ripgreprc
 end
+
+# Local, machine-only config (never managed by chezmoi)
+if test -f ~/.config/fish/local.fish
+    source ~/.config/fish/local.fish
+end

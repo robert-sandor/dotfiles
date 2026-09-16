@@ -1,6 +1,11 @@
 README.md
 .config/niri/outputs
 
+# local, machine-only shell config - never managed by chezmoi
+.bashrc.local
+.zshrc.local
+.config/fish/local.fish
+
 {{ if ne .chezmoi.os "linux" }}
 .config/niri
 .config/noctalia

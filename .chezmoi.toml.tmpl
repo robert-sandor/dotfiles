@@ -1,11 +1,18 @@
 {{- $email := "sandorrobertk94@gmail.com" -}}
 {{- $name := "Robert Sandor" -}}
-
+{{- $work := false -}}
 {{- $headless := true -}}
 {{- if eq .chezmoi.os "darwin" -}}
 {{-   $headless = false -}}
-{{- else if stdinIsATTY -}}
-{{-   $headless = promptBoolOnce . "headless" "headless" false -}}
+{{- end -}}
+
+{{- if stdinIsATTY -}}
+{{-   $email = promptStringOnce . "email" "git email" $email -}}
+{{-   $name = promptStringOnce . "name" "git name" $name -}}
+{{-   $work = promptBoolOnce . "work" "work machine" false -}}
+{{-   if eq .chezmoi.os "linux" -}}
+{{-     $headless = promptBoolOnce . "headless" "headless" false -}}
+{{-   end -}}
 {{- end -}}
 
 {{- $font := "JetbrainsMono Nerd Font" -}}
@@ -20,15 +27,18 @@
 {{-   $fontSize = 14 -}}
 {{- end -}}
 
+{{- $fishPaths := list "/opt/homebrew/bin" "/usr/local/bin" "/home/linuxbrew/.linuxbrew/bin" "/usr/bin" -}}
+{{- $fishPath := findExecutable "fish" $fishPaths -}}
 {{- $shell := env "SHELL" -}}
-{{- if findExecutable "fish" (list "/opt/homebrew/bin" "/home/linuxbrew/.linuxbrew/bin" "/usr/bin" ) -}}
-{{-   $shell = findExecutable "fish" (list "/opt/homebrew/bin" "/home/linuxbrew/.linuxbrew/bin" "/usr/bin" ) -}}
+{{- if $fishPath -}}
+{{-   $shell = $fishPath -}}
 {{- end -}}
 
 [data]
 email = {{ $email | quote }}
 name = {{ $name | quote }}
 headless = {{ $headless }}
+work = {{ $work }}
 font = {{ $font | quote }}
 fontSize = {{ $fontSize }}
 osid = {{ $osID | quote }}
@@ -39,6 +49,7 @@ chezmoi_version = "v2.72.2"
 [scriptEnv]
 OSID = {{ $osID | quote }}
 HEADLESS = "{{ $headless }}"
+WORK = "{{ $work }}"
 
 [diff]
 command = "delta"

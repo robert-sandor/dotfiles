@@ -112,3 +112,8 @@ set -o vi
 if [ -f ~/.bash_functions ]; then
   . ~/.bash_functions
 fi
+
+# Local, machine-only config (never managed by chezmoi)
+if [ -f ~/.bashrc.local ]; then
+  . ~/.bashrc.local
+fi
