@@ -1,5 +1,5 @@
 README.md
-.config/niri/outputs
+.config/niri/noctalia.kdl
 
 # local, machine-only shell config - never managed by chezmoi
 .bashrc.local

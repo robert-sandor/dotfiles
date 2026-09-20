@@ -1,0 +1,2 @@
+// Startup apps - https://github.com/niri-wm/niri/wiki/Configuration:-Miscellaneous
+spawn-at-startup "noctalia"

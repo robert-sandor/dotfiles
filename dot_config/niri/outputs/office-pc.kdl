@@ -1,5 +1,0 @@
-// https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
-output "LG Electronics LG HDR WQHD+ 301NTUW30230" {
-    variable-refresh-rate
-    scale 1.2
-}

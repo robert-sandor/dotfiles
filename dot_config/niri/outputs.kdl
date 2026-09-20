@@ -1,0 +1,18 @@
+// https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
+
+// Internal display
+output "BOE NE135A1M-NY1 Unknown" {
+  mode "2880x1920@120.000"
+  scale 2
+  variable-refresh-rate on-demand=true
+
+  layout { preset-column-widths { proportion 0.5; proportion 1.0; }; }
+}
+
+// external Asus 5K display
+output "ASUSTek COMPUTER INC XG27JCG TBLMQS083924" {
+  mode "5120x2880@119.994"
+  scale 2
+  variable-refresh-rate on-demand=true
+  focus-at-startup
+}

@@ -1,0 +1,22 @@
+// Miscellaneous - https://github.com/niri-wm/niri/wiki/Configuration:-Miscellaneous
+prefer-no-csd // tell windows to not draw client-side decorations
+screenshot-path null // disables saving screenshots to disk, will only copy to clipboard
+
+// XDG_CURRENT_DESKTOP and XDG_SESSION_TYPE are set by niri/session already
+environment {
+  QT_QPA_PLATFORM "wayland"
+  ELECTRON_OZONE_PLATFORM_HINT "auto"
+  QT_QPA_PLATFORMTHEME "gtk3"
+  QT_QPA_PLATFORMTHEME_QT6 "gtk3"
+  QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
+}
+
+cursor { hide-when-typing; }
+
+hotkey-overlay { skip-at-startup; } // Don't show the hotkey overlay on startup
+
+// Debug options - https://github.com/niri-wm/niri/wiki/Configuration:-Debug-Options
+debug {
+  // Allows notification actions and window activation from Noctalia.
+  honor-xdg-activation-with-invalid-serial
+}

@@ -82,6 +82,25 @@ binds {
   Mod+Ctrl+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
   Mod+Ctrl+WheelScrollUp cooldown-ms=150 { move-column-to-workspace-up; }
 
+  Mod+1 { focus-workspace 1; }
+  Mod+2 { focus-workspace 2; }
+  Mod+3 { focus-workspace 3; }
+  Mod+4 { focus-workspace 4; }
+  Mod+5 { focus-workspace 5; }
+  Mod+6 { focus-workspace 6; }
+  Mod+7 { focus-workspace 7; }
+  Mod+8 { focus-workspace 8; }
+  Mod+9 { focus-workspace 9; }
+  Mod+Ctrl+1 { move-column-to-workspace 1; }
+  Mod+Ctrl+2 { move-column-to-workspace 2; }
+  Mod+Ctrl+3 { move-column-to-workspace 3; }
+  Mod+Ctrl+4 { move-column-to-workspace 4; }
+  Mod+Ctrl+5 { move-column-to-workspace 5; }
+  Mod+Ctrl+6 { move-column-to-workspace 6; }
+  Mod+Ctrl+7 { move-column-to-workspace 7; }
+  Mod+Ctrl+8 { move-column-to-workspace 8; }
+  Mod+Ctrl+9 { move-column-to-workspace 9; }
+
   Mod+Ctrl+WheelScrollRight { move-column-right; }
   Mod+Ctrl+WheelScrollLeft { move-column-left; }
   Mod+Shift+WheelScrollDown { focus-column-right; }
@@ -92,9 +111,9 @@ binds {
   // Move the focused window in and out of columns to the left/right.
   Mod+BracketLeft { consume-or-expel-window-left; }
   Mod+BracketRight { consume-or-expel-window-right; }
-  // Add the window to the right into the current column
+  // Pull the window to the right into the current column
   Mod+Comma { consume-window-into-column; }
-  // Add the window to the right into the current column
+  // Push the focused window out of its column
   Mod+Period { expel-window-from-column; }
 
   // ─── Layout Controls ───

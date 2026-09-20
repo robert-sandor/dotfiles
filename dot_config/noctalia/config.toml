@@ -1,0 +1,77 @@
+[bar]
+order = ["top_bar"]
+
+[bar.top_bar]
+margin_edge = 6
+margin_ends = 6
+start = ["workspaces"]
+center = ["media", "clock"]
+end = ["tray", "clipboard", "network", "bluetooth", "volume", "brightness", "battery", "control-center", "notifications", "session"]
+
+[battery]
+warning_threshold = 20
+
+[brightness]
+enable_ddcutil = true
+sync_all_monitors = true
+
+[location]
+address = "Cluj-Napoca, Romania"
+
+[shell]
+font_family = "JetBrainsMono Nerd Font"
+polkit_agent = true
+
+[shell.animation]
+speed = 3.0
+
+[shell.launcher]
+categories = false
+
+[shell.launcher.providers.session]
+global = true
+
+[shell.launcher.providers.windows]
+global = true
+
+[shell.panel]
+open_near_click_control_center = true
+
+[theme]
+source = "community"
+community_palette = "Catppuccin Mocha Peach"
+
+[theme.templates]
+builtin_ids = ["niri"]
+
+[wallpaper.default]
+path = "/home/rsandor/Pictures/Wallpapers/lac_gilau_2026.png"
+
+[widget.battery]
+display_mode = "graphic"
+show_label = false
+
+[widget.brightness]
+show_label = false
+
+[widget.control-center]
+glyph = "settings-filled"
+
+[widget.media]
+hide_when_no_media = true
+
+[widget.network]
+show_label = false
+vpn_status = "both"
+
+[widget.notifications]
+hide_when_no_unread = true
+
+[widget.volume]
+show_label = false
+
+[widget.wallpaper]
+enabled = false
+
+[widget.workspaces]
+style = "minimal"

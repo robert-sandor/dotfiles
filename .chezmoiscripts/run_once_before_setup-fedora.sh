@@ -33,6 +33,8 @@ packages=(
   jetbrainsmono-nerd-fonts
   mise
   nextcloud-client
+  niri
+  noctalia
   podman
   ripgrep
   rsync
