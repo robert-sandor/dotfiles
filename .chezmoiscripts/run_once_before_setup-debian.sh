@@ -22,6 +22,7 @@ packages=(
   git-delta
   htop
   lazygit
+  mise
   neovim
   ripgrep
   rsync
@@ -36,6 +37,12 @@ echo "Adding yazi repository..."
 if [[ ! -f /etc/apt/sources.list.d/yazi.list ]]; then
   curl -fsSL https://yazi-rs.github.io/builds/yazi-keyring.gpg | sudo tee /usr/share/keyrings/yazi-keyring.gpg >/dev/null
   echo "deb [signed-by=/usr/share/keyrings/yazi-keyring.gpg] https://yazi-rs.github.io/builds/ stable main" | sudo tee /etc/apt/sources.list.d/yazi.list >/dev/null
+fi
+
+echo "Adding mise repository..."
+if ! dpkg -s mise &>/dev/null; then
+  sudo apt-get install -y extrepo
+  sudo extrepo enable mise
 fi
 
 echo "Installing packages..."

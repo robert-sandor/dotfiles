@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# mise config hash: {{ include "dot_config/mise/config.toml" | sha256sum }}
+set -eo pipefail
+
+export PATH="/opt/homebrew/bin:/usr/local/bin:$HOME/.local/bin:$PATH"
+
+if ! command -v mise >/dev/null 2>&1; then
+  echo "mise not found, skipping global tool install"
+  exit 0
+fi
+
+echo "Installing global mise tools..."
+cd "$HOME"
+mise install

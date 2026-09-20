@@ -6,7 +6,7 @@ README.md
 .zshrc.local
 .config/fish/local.fish
 
-{{ if ne .chezmoi.os "linux" }}
+{{ if ne .osid "linux-fedora" }}
 .config/niri
 .config/noctalia
 {{ end }}
@@ -14,8 +14,6 @@ README.md
 {{ if .headless }}
 .ideavimrc
 .config/ghostty
-.config/kitty
-.config/lazygit
-.config/mise
 .config/posting
+.config/zed
 {{ end }}
