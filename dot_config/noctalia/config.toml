@@ -2,8 +2,12 @@
 order = ["top_bar"]
 
 [bar.top_bar]
-margin_edge = 6
-margin_ends = 6
+margin_edge = 0
+margin_ends = 0
+radius_top_left = 0
+radius_top_right = 0
+radius_bottom_left = 12
+radius_bottom_right = 12
 start = ["workspaces"]
 center = ["media", "clock"]
 end = ["tray", "clipboard", "network", "bluetooth", "volume", "brightness", "battery", "control-center", "notifications", "session"]
