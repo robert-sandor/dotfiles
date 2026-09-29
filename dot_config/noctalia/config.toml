@@ -10,7 +10,7 @@ radius_bottom_left = 12
 radius_bottom_right = 12
 start = ["workspaces"]
 center = ["media", "clock"]
-end = ["tray", "clipboard", "network", "bluetooth", "volume", "brightness", "battery", "control-center", "notifications", "session"]
+end = ["tray", "network", "bluetooth", "volume", "brightness", "battery", "control-center", "notifications", "session"]
 
 [battery]
 warning_threshold = 20
@@ -30,16 +30,33 @@ polkit_agent = true
 speed = 3.0
 
 [shell.launcher]
-categories = false
+categories = false  # show launcher category filters; Tab toggles them while open
+compact = true  # smaller icons and tighter rows; hides subtitles
+
+[shell.launcher.providers.calculator]
+prefix = "calc"  # trigger word for calculator expressions (e.g. "/calc")
+global = true  # also show calculator results in un-prefixed search
+
+[shell.launcher.providers.emoji]
+prefix = "emo"  # trigger word (triggers on provider_prefix + trigger, e.g. "/emo")
 
 [shell.launcher.providers.session]
-global = true
+prefix = "session"  # trigger word for session actions (e.g. "/session")
+global = true  # set true to also include session actions in un-prefixed search
+
+[shell.launcher.providers.wallpaper]
+prefix = "wall"  # trigger word for wallpaper selector (e.g. "/wall")
 
 [shell.launcher.providers.windows]
+prefix = "win"  # trigger word for windows (e.g. "/win")
 global = true
 
 [shell.panel]
 open_near_click_control_center = true
+launcher_placement = "attached"
+launcher_position = "center"
+clipboard_placement = "attached"
+clipboard_position = "auto"
 
 [theme]
 source = "community"

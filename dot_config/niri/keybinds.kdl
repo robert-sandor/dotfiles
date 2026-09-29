@@ -8,6 +8,7 @@ binds {
 
   // Shell keybinds - noctalia
   Mod+Space { spawn-sh "noctalia msg panel-toggle launcher"; }
+  Mod+V { spawn-sh "noctalia msg panel-toggle clipboard"; }
   Mod+S { spawn-sh "noctalia msg panel-toggle control-center"; }
   Mod+Shift+Q { spawn-sh "noctalia msg session lock"; }
 
