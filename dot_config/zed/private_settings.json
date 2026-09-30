@@ -17,11 +17,6 @@
     "default_width": 360.0,
     "dock": "left",
   },
-  "terminal": {
-    "shell": {
-      "program": "fish",
-    },
-  },
   "telemetry": {
     "diagnostics": false,
     "metrics": false,

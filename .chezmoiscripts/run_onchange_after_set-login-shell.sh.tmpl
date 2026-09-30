@@ -1,0 +1,24 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/usr/bin/env bash
+set -eo pipefail
+
+target=/usr/bin/zsh
+current=$(getent passwd "$(id -un)" | cut -d: -f7)
+
+if [[ "$current" == "$target" ]]; then
+  exit 0
+fi
+
+if ! command -v chsh >/dev/null 2>&1; then
+  echo "chsh not found, skipping login shell change" >&2
+  exit 0
+fi
+
+if ! grep -qx "$target" /etc/shells; then
+  echo "$target is not listed in /etc/shells, skipping login shell change" >&2
+  exit 0
+fi
+
+echo "Setting login shell to $target..."
+sudo chsh -s "$target" "$(id -un)" || echo "chsh failed, login shell unchanged" >&2
+{{ end -}}
