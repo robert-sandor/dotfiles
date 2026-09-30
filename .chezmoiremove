@@ -1,3 +1,4 @@
 .local/bin/usage
 .zshrc
 .local/share/zinit
+.config/zsh/plugins.zsh

@@ -94,7 +94,7 @@ if [[ $(command -v brew) == "" ]]; then
 fi
 
 if [[ $(command -v brew) == "" ]]; then
-  eval "$(/opt/homebrew/bin/brew shellenv 2>/dev/null || /usr/local/bin/brew shellenv)"
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 echo "Installing formulae..."

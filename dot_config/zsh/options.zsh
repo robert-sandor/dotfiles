@@ -27,6 +27,6 @@ zle -N edit-command-line
 bindkey -M viins '^[e' edit-command-line
 bindkey -M vicmd '^[e' edit-command-line
 
-# Completion (after env.zsh so brew's FPATH is set; before tools.zsh)
+# Completion
 autoload -Uz compinit
 compinit

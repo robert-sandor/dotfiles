@@ -23,7 +23,7 @@ alias c='clear'
 alias q='exit'
 
 # Setup homebrew if installed
-for brew_prefix in /opt/homebrew /home/linuxbrew/.linuxbrew ~/.linuxbrew; do
+for brew_prefix in /opt/homebrew /home/linuxbrew/.linuxbrew; do
   if [ -x "$brew_prefix/bin/brew" ]; then
     eval "$($brew_prefix/bin/brew shellenv bash)"
     break

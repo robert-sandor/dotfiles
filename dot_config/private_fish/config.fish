@@ -14,7 +14,7 @@ abbr -a c clear
 abbr -a q exit
 
 # Setup homebrew if installed
-for brew_prefix in /opt/homebrew /home/linuxbrew/.linuxbrew ~/.linuxbrew
+for brew_prefix in /opt/homebrew /home/linuxbrew/.linuxbrew
     if test -x "$f/bin/brew"
         $brew_prefix/bin/brew shellenv fish | source
         break

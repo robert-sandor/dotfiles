@@ -21,3 +21,7 @@ if command -v bat >/dev/null 2>&1; then
   alias cat='bat -p'
   alias sshpub='bat -p ~/.ssh/id_ed25519.pub'
 fi
+
+if command -v lazygit >/dev/null 2>&1; then
+  alias lg='lazygit'
+fi

@@ -1,5 +1,5 @@
-# Tool integrations
 if command -v fzf >/dev/null 2>&1; then
+  export FZF_DEFAULT_OPTS_FILE=~/.config/fzfrc
   eval "$(fzf --zsh)"
 fi
 
@@ -16,21 +16,24 @@ if command -v mise >/dev/null 2>&1; then
 fi
 
 if command -v carapace >/dev/null 2>&1; then
+  export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
   source <(carapace _carapace)
 fi
 
-# Syntax highlighting (binary from .chezmoiexternals/zsh-patina.toml.tmpl)
 if command -v zsh-patina >/dev/null 2>&1; then
   eval "$(zsh-patina activate)"
   eval "$(zsh-patina completion)"
 fi
 
-# Autosuggestions (binary from .chezmoiexternals/deja.toml.tmpl)
 if command -v deja >/dev/null 2>&1; then
-  # export DEJA_CYCLE_KEY=^N
+  # Disable keybinds I don't use
   export DEJA_CYCLE_FUZZY_KEY=
   export DEJA_CYCLE_FUZZY_BACK_KEY=
   export DEJA_TOGGLE_EMPTY_KEY=
+
+  # Set defaults here
+  export DEJA_FUZZY=smart
+  export DEJA_EMPTY=off
 
   if [[ -r "$HOME/.local/share/deja/init.zsh" ]]; then
     source "$HOME/.local/share/deja/init.zsh"
