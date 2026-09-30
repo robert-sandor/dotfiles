@@ -11,6 +11,7 @@ if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
   PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 fi
 export PATH
+typeset -U path
 
 alias c='clear'
 alias q='exit'
@@ -36,9 +37,21 @@ setopt hist_reduce_blanks
 setopt hist_ignore_space
 setopt no_beep
 
+# Shell behavior
+setopt interactive_comments
+setopt auto_cd
+setopt auto_pushd
+setopt pushd_ignore_dups
+
 # Enable Vi keybinds
 bindkey -v
 KEYTIMEOUT=5
+
+# Edit current line in $EDITOR (same key as fish)
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey -M viins '^[e' edit-command-line
+bindkey -M vicmd '^[e' edit-command-line
 
 # Plugin manager - zinit
 

@@ -31,6 +31,7 @@ packages=(
   unzip
   yazi
   zoxide
+  zsh
 )
 
 echo "Adding yazi repository..."

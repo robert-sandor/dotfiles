@@ -49,6 +49,7 @@ packages=(
   yazi
   zed
   zoxide
+  zsh
 )
 
 flatpaks=(
