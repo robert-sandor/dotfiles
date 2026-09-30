@@ -29,6 +29,7 @@ fingerprint = true
 blurred_desktop = true
 transition = ["fade"]
 transition_duration = 500
+blur_intensity = 1.0
 
 [shell]
 font_family = "JetBrainsMono Nerd Font"
