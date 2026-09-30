@@ -7,7 +7,3 @@ input {
   mouse { accel-profile "flat"; } // Disable mouse acceleration
   touchpad { natural-scroll; scroll-factor 0.5; dwt; click-method "clickfinger"; }
 }
-
-// Switch events - https://github.com/niri-wm/niri/wiki/Configuration:-Switch-Events
-// todo - figure out how to handle laptop lid closing to go to sleep
-switch-events { lid-close { spawn "noctalia msg session lock"; }; }

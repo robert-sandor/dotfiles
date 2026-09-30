@@ -22,6 +22,14 @@ sync_all_monitors = true
 [location]
 address = "Cluj-Napoca, Romania"
 
+[lockscreen]
+enabled = true
+lock_before_suspend = true
+fingerprint = true
+blurred_desktop = true
+transition = ["fade"]
+transition_duration = 500
+
 [shell]
 font_family = "JetBrainsMono Nerd Font"
 polkit_agent = true
