@@ -25,15 +25,42 @@ done
 
 # History settings
 HISTFILE=~/.zsh_history
-HISTSIZE=1000
-SAVEHIST=2000
-setopt APPEND_HISTORY
-setopt HIST_IGNORE_SPACE
-setopt HIST_IGNORE_DUPS
+HISTSIZE=1000000
+SAVEHIST=1000000
+setopt inc_append_history
+setopt share_history
+setopt hist_ignore_dups
+setopt hist_expire_dups_first
+setopt hist_find_no_dups
+setopt hist_reduce_blanks
+setopt hist_ignore_space
+setopt no_beep
+
+# Enable Vi keybinds
+bindkey -v
+KEYTIMEOUT=5
+
+# Plugin manager - zinit
+
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+
+declare -A ZINIT
+ZINIT[NO_ALIASES]=1
+source "${ZINIT_HOME}/zinit.zsh"
 
 # Load completion
 autoload -Uz compinit
 compinit
+
+# super smart autocompletions
+zinit ice wait"0" lucid depth=1 pick"deja.plugin.zsh"
+zinit light Giammarco-Ferranti/deja
+
+# syntax highlighting
+zinit ice as"program" from"gh-r" pick"zsh-patina-*/zsh-patina" atload'eval "$(zsh-patina activate)" && eval "$(zsh-patina completion)"'
+zinit light michel-kraemer/zsh-patina
 
 # External command specific configs
 if command -v nvim >/dev/null 2>&1; then
@@ -91,9 +118,6 @@ fi
 if command -v rg >/dev/null 2>&1; then
   export RIPGREP_CONFIG_PATH=~/.config/ripgreprc
 fi
-
-# Enable Vi keybinds
-bindkey -v
 
 # Load custom functions
 if [ -f ~/.bash_functions ]; then

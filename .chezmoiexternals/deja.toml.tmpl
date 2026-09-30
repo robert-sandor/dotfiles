@@ -1,0 +1,5 @@
+[".local/bin/deja"]
+type = "archive-file"
+url = {{ gitHubLatestReleaseAssetURL "Giammarco-Ferranti/deja" (printf "deja_*_%s_%s.tar.gz" .chezmoi.os .chezmoi.arch) | quote }}
+executable = true
+path = "deja"
