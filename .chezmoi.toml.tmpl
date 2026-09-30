@@ -1,6 +1,7 @@
 {{- $email := "sandorrobertk94@gmail.com" -}}
 {{- $name := "Robert Sandor" -}}
 {{- $work := false -}}
+{{- $shellName := "zsh" -}}
 {{- $headless := true -}}
 {{- if eq .chezmoi.os "darwin" -}}
 {{-   $headless = false -}}
@@ -10,6 +11,7 @@
 {{-   $email = promptStringOnce . "email" "git email" $email -}}
 {{-   $name = promptStringOnce . "name" "git name" $name -}}
 {{-   $work = promptBoolOnce . "work" "work machine" false -}}
+{{-   $shellName = promptChoiceOnce . "shell_name" "interactive shell" (list "zsh" "fish") $shellName -}}
 {{-   if eq .chezmoi.os "linux" -}}
 {{-     $headless = promptBoolOnce . "headless" "headless" false -}}
 {{-   end -}}
@@ -27,12 +29,8 @@
 {{-   $fontSize = 14 -}}
 {{- end -}}
 
-{{- $fishPaths := list "/opt/homebrew/bin" "/usr/local/bin" "/home/linuxbrew/.linuxbrew/bin" "/usr/bin" -}}
-{{- $fishPath := findExecutable "fish" $fishPaths -}}
-{{- $shell := env "SHELL" -}}
-{{- if $fishPath -}}
-{{-   $shell = $fishPath -}}
-{{- end -}}
+{{- $shellPaths := list "/opt/homebrew/bin" "/usr/local/bin" "/home/linuxbrew/.linuxbrew/bin" "/usr/bin" "/bin" -}}
+{{- $shell := findExecutable $shellName $shellPaths | default (env "SHELL") -}}
 
 [data]
 email = {{ $email | quote }}
@@ -42,6 +40,7 @@ work = {{ $work }}
 font = {{ $font | quote }}
 fontSize = {{ $fontSize }}
 osid = {{ $osID | quote }}
+shell_name = {{ $shellName | quote }}
 shell = {{ $shell | quote }}
 neovim_version = "v0.12.5"
 chezmoi_version = "v2.72.2"
