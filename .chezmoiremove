@@ -1,1 +1,3 @@
 .local/bin/usage
+.zshrc
+.local/share/zinit

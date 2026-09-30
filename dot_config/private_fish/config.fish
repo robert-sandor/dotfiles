@@ -7,7 +7,7 @@ end
 
 fish_vi_key_bindings
 fish_config theme choose catppuccin-mocha
-fish_add_path ~/.local/bin ~/bin
+fish_add_path ~/.local/bin
 
 # Some potentially handy abbrs
 abbr -a c clear

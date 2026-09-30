@@ -1,0 +1,12 @@
+{{- $cpu := index (dict "amd64" "x86_64" "arm64" "aarch64") .chezmoi.arch -}}
+{{- $triple := printf "%s-unknown-linux-gnu" $cpu -}}
+{{- if eq .chezmoi.os "darwin" -}}
+{{-   $triple = printf "%s-apple-darwin" $cpu -}}
+{{- end -}}
+{{- $url := gitHubLatestReleaseAssetURL "michel-kraemer/zsh-patina" (printf "zsh-patina-v*-%s.tar.gz" $triple) -}}
+
+[".local/bin/zsh-patina"]
+type = "archive-file"
+url = {{ $url | quote }}
+executable = true
+path = {{ printf "%s/zsh-patina" (base $url | trimSuffix ".tar.gz") | quote }}

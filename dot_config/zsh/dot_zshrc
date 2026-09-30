@@ -1,0 +1,19 @@
+#!/usr/bin/env zsh
+
+# Exit if not interactive
+case $- in
+*i*) ;;
+*) return ;;
+esac
+
+# Order matters: env -> options (keymap) -> tools -> aliases
+source "$ZDOTDIR/env.zsh"
+source "$ZDOTDIR/options.zsh"
+source "$ZDOTDIR/tools.zsh"
+source "$ZDOTDIR/aliases.zsh"
+source "$ZDOTDIR/functions.zsh"
+
+# Local, machine-only config (never managed by chezmoi)
+if [ -f ~/.zshrc.local ]; then
+  . ~/.zshrc.local
+fi
