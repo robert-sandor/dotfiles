@@ -26,10 +26,13 @@ if command -v zsh-patina >/dev/null 2>&1; then
 fi
 
 if command -v deja >/dev/null 2>&1; then
+  # Customize keybinds
+  export DEJA_ACCEPT_KEY='^Y'
+  export DEJA_CYCLE_KEY='^N'
   # Disable keybinds I don't use
-  export DEJA_CYCLE_FUZZY_KEY=
-  export DEJA_CYCLE_FUZZY_BACK_KEY=
-  export DEJA_TOGGLE_EMPTY_KEY=
+  export DEJA_CYCLE_FUZZY_KEY=''
+  export DEJA_CYCLE_FUZZY_BACK_KEY=''
+  export DEJA_TOGGLE_EMPTY_KEY=''
 
   # Set defaults here
   export DEJA_FUZZY=smart
