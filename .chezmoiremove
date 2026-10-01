@@ -2,3 +2,4 @@
 .zshrc
 .local/share/zinit
 .config/zsh/plugins.zsh
+.bash_functions
