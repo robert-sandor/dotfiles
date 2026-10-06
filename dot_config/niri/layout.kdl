@@ -9,10 +9,11 @@ layout {
   shadow { on; }
   focus-ring { width 2; }
   background-color "transparent"
+  struts { left 8; right 8; }
 }
 
 // Animations - https://github.com/niri-wm/niri/wiki/Configuration:-Animations
-animations { slowdown 0.5;} // Speed up animations 2x from default
+animations { slowdown 0.5; } // Speed up animations 2x from default
 
 // Recent windows - https://github.com/niri-wm/niri/wiki/Configuration:-Recent-Windows
 recent-windows {
