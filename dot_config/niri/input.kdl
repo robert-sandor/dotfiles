@@ -1,9 +1,21 @@
 // Input - https://github.com/YaLTeR/niri/wiki/Configuration:-Input
 input {
   keyboard {
-    xkb { layout "us"; options "caps:escape"; }
+    xkb {
+      layout "us"
+      options "caps:escape"
+    }
     repeat-delay 200
   }
-  mouse { accel-profile "flat"; } // Disable mouse acceleration
-  touchpad { natural-scroll; scroll-factor 0.5; dwt; click-method "clickfinger"; }
+
+  mouse {
+    accel-profile "flat" // Disable mouse acceleration
+  }
+
+  touchpad {
+    natural-scroll
+    scroll-factor 0.5
+    dwt
+    click-method "clickfinger"
+  }
 }
