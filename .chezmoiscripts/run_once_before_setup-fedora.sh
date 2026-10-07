@@ -46,6 +46,7 @@ packages=(
   starship
   tailscale
   tealdeer
+  vicinae
   yazi
   zed
   zoxide
