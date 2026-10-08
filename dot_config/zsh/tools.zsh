@@ -17,6 +17,8 @@ fi
 
 if command -v carapace >/dev/null 2>&1; then
   export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
+  # Match completions case-insensitively (carapace ignores zsh's matcher-list)
+  export CARAPACE_MATCH=CASE_INSENSITIVE
   source <(carapace _carapace)
 fi
 

@@ -21,6 +21,7 @@ common_formulae=(
   helix
   imagemagick
   lazygit
+  libxcrypt
   mas
   mise
   p7zip
@@ -198,4 +199,3 @@ echo "Setting up misc settings..."
 defaults write com.apple.appleseed.FeedbackAssistant "Autogather" -bool "false" # Do not autogather large files when submitting a report
 defaults write com.apple.ActivityMonitor "UpdatePeriod" -int "1" # Activity Monitor faster updates
 killall "Activity Monitor" 2>/dev/null || true
-
