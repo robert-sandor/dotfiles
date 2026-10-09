@@ -27,22 +27,14 @@ if command -v zsh-patina >/dev/null 2>&1; then
   eval "$(zsh-patina completion)"
 fi
 
-if command -v deja >/dev/null 2>&1; then
-  # Customize keybinds
-  export DEJA_ACCEPT_KEY='^Y'
-  export DEJA_CYCLE_KEY='^N'
-  # Disable keybinds I don't use
-  export DEJA_CYCLE_FUZZY_KEY=''
-  export DEJA_CYCLE_FUZZY_BACK_KEY=''
-  export DEJA_TOGGLE_EMPTY_KEY=''
-
-  # Set defaults here
-  export DEJA_FUZZY=smart
-  export DEJA_EMPTY=off
-
-  if [[ -r "$HOME/.local/share/deja/init.zsh" ]]; then
-    source "$HOME/.local/share/deja/init.zsh"
-  else
-    eval "$(deja init zsh)"
-  fi
+zsh_autosuggest="$HOME/.local/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+if [[ -r "$zsh_autosuggest" ]]; then
+  # Suggest what usually follows the previous command, else the latest history match
+  ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history)
+  # Skip suggestions for very long buffers (e.g. big pastes)
+  ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=100
+  source "$zsh_autosuggest"
+  # Accept the whole suggestion with Ctrl+Y (Right arrow also works)
+  bindkey -M viins '^Y' autosuggest-accept
 fi
+unset zsh_autosuggest
