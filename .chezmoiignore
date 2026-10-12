@@ -11,6 +11,10 @@ README.md
 .config/noctalia
 {{ end }}
 
+{{ if ne .osid "darwin" }}
+.config/aerospace
+{{ end }}
+
 {{ if .headless }}
 .ideavimrc
 .config/ghostty
