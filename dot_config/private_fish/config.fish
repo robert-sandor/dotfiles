@@ -67,6 +67,10 @@ if command -q bat
     abbr -a sshpub 'bat -p $HOME/.ssh/id_ed25519.pub'
 end
 
+if command -q lazygit
+    abbr -a lg lazygit
+end
+
 if command -q rg
     set -gx RIPGREP_CONFIG_PATH ~/.config/ripgreprc
 end
