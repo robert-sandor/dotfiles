@@ -15,7 +15,7 @@ abbr -a q exit
 
 # Setup homebrew if installed
 for brew_prefix in /opt/homebrew /home/linuxbrew/.linuxbrew
-    if test -x "$f/bin/brew"
+    if test -x "$brew_prefix/bin/brew"
         $brew_prefix/bin/brew shellenv fish | source
         break
     end
@@ -42,7 +42,8 @@ if command -q zoxide
     zoxide init fish | source
 end
 
-if command -q mise
+# Some mise packages (e.g. homebrew) already activate it via vendor_conf.d
+if command -q mise; and not functions -q __mise_env_eval
     mise activate fish | source
 end
 

@@ -3,3 +3,6 @@
 .local/share/zinit
 .config/zsh/plugins.zsh
 .bash_functions
+.local/bin/zsh-patina
+.local/share/zsh/plugins
+.config/zsh-patina
