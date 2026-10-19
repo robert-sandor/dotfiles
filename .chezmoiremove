@@ -6,3 +6,9 @@
 .local/bin/zsh-patina
 .local/share/zsh/plugins
 .config/zsh-patina
+.config/fish/themes
+.config/fish/abbrs.fish
+.config/fish/functions/bwlock.fish
+.config/fish/functions/bwunlock.fish
+.local/bin/carapace
+.config/bat/themes

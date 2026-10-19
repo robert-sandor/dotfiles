@@ -7,7 +7,6 @@ end
 
 fish_vi_key_bindings
 fish_config theme choose catppuccin-mocha
-fish_add_path ~/.local/bin
 
 # Some potentially handy abbrs
 abbr -a c clear
@@ -20,6 +19,8 @@ for brew_prefix in /opt/homebrew /home/linuxbrew/.linuxbrew
         break
     end
 end
+
+fish_add_path --move --path ~/.local/bin
 
 # Setup other utilities if installed
 if command -q nvim
@@ -35,7 +36,7 @@ if command -q fzf
 end
 
 if command -q starship
-    starship init fish | source
+    starship init fish --print-full-init | source
 end
 
 if command -q zoxide
@@ -45,11 +46,6 @@ end
 # Some mise packages (e.g. homebrew) already activate it via vendor_conf.d
 if command -q mise; and not functions -q __mise_env_eval
     mise activate fish | source
-end
-
-if command -q carapace
-    set -gx CARAPACE_BRIDGES 'zsh,fish,bash,inshellisense'
-    carapace _carapace | source
 end
 
 if command -q eza

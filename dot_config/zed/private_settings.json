@@ -33,6 +33,11 @@
     "words": "enabled",
   },
   "show_edit_predictions": false,
+  "terminal": {
+    "shell": {
+      "program": "fish",
+    },
+  },
   "diagnostics": {
     "inline": {
       "enabled": true,

@@ -1,6 +1,7 @@
 function dotfiles -d 'manage dotfiles'
   if not command -q chezmoi
     echo "missing chezmoi" >&2
+    return 1
   end
 
   if test -f "$argv[1]"

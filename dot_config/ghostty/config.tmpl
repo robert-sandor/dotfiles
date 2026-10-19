@@ -9,6 +9,9 @@ window-padding-balance = true
 window-padding-x = 4
 window-padding-y = 4
 
+{{ with lookPath "fish" -}}
+command = {{ . }}
+{{ end -}}
 shell-integration-features = cursor,sudo,title,ssh-env
 
 macos-option-as-alt = true

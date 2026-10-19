@@ -1,6 +1,0 @@
-[".config/bat/themes"]
-type = "archive"
-url = "https://github.com/catppuccin/bat/archive/refs/heads/main.zip"
-refreshPeriod = "168h"
-include = ["**/themes/*.tmTheme"]
-stripComponents = 2
