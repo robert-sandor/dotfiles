@@ -1,1 +1,13 @@
+# macOS
+.DS_Store
+
+# Claude Code local-only files
 **/.claude/settings.local.json
+CLAUDE.local.md
+
+# mise local overrides
+mise.local.toml
+.mise.local.toml
+
+# JetBrains
+.idea/
