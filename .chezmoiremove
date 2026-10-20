@@ -11,4 +11,4 @@
 .config/fish/functions/bwlock.fish
 .config/fish/functions/bwunlock.fish
 .local/bin/carapace
-.config/bat/themes
+.config/bat
