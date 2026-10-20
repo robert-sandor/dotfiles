@@ -24,3 +24,6 @@
 
 [include]
 	path = "~/.config/git/catppuccin.gitconfig"
+
+[alias]
+	delete-gone-branches = "!git fetch -p && git for-each-ref --format='%(refname:short) %(upstream:track)' refs/heads | awk '$2==\"[gone]\"{print $1}' | xargs git branch -D"
