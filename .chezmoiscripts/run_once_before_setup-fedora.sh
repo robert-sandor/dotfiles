@@ -45,6 +45,8 @@ packages=(
   rsync
   starship
   tailscale
+  tree-sitter
+  tree-sitter-cli
   vicinae
   yazi
   zed

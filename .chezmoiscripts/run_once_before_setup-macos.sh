@@ -28,6 +28,8 @@ common_formulae=(
   ripgrep
   rsync
   starship
+  tree-sitter
+  tree-sitter-cli
   yazi
   zoxide
 )

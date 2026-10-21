@@ -27,6 +27,7 @@ packages=(
   ripgrep
   rsync
   starship
+  tree-sitter-cli
   unzip
   yazi
   zoxide
