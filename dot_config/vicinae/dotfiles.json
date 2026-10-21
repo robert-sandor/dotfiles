@@ -1,0 +1,25 @@
+// Managed by chezmoi. Imported from settings.json, which vicinae owns and writes GUI changes to.
+// Values in settings.json take precedence over this file.
+{
+  "$schema": "https://vicinae.com/schemas/config.json",
+  "encrypt_sensitive_data": true,
+  "tray": {
+    "enabled": false
+  },
+  "theme": {
+    "dark": {
+      "name": "libadwaita-dark"
+    }
+  },
+  "telemetry": {
+    "system_info": false
+  },
+  "launcher_window": {
+    "client_side_decorations": {
+      "border_width": 2
+    },
+    "compact_mode": {
+      "enabled": true
+    }
+  }
+}

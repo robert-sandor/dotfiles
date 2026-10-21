@@ -9,6 +9,7 @@ README.md
 {{ if ne .osid "linux-fedora" }}
 .config/niri
 .config/noctalia
+.config/vicinae
 {{ end }}
 
 {{ if ne .osid "darwin" }}
