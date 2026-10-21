@@ -64,6 +64,7 @@ personal_casks=(
   tailscale-app
   tidal
   todoist-app
+  zen
 )
 work_casks=(
   docker-desktop

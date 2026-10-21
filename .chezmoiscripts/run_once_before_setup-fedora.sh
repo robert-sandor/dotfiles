@@ -53,6 +53,7 @@ packages=(
 )
 
 flatpaks=(
+  app.zen_browser.zen              # browser
   com.bitwarden.desktop            # password manager
   com.discordapp.Discord           # discord
   com.github.tchx84.Flatseal       # flatpak permission editor
