@@ -116,16 +116,18 @@ tailscale configure systray --enable-startup=systemd
 systemctl --user daemon-reload
 systemctl --user enable --now tailscale-systray
 
-echo "Enabling GNOME extensions..."
-enable_extension() {
-  local uuid="$1" current items
-  current=$(gsettings get org.gnome.shell enabled-extensions)
-  [[ "$current" == *"'$uuid'"* ]] && return
+# Append a string to a gsettings list, unless it's already there
+gsettings_append() {
+  local schema="$1" key="$2" value="$3" current items
+  current=$(gsettings get "$schema" "$key")
+  [[ "$current" == *"'$value'"* ]] && return
   items=$(tr -d '[]' <<<"${current#@as }")
-  gsettings set org.gnome.shell enabled-extensions "[${items:+$items, }'$uuid']"
+  gsettings set "$schema" "$key" "[${items:+$items, }'$value']"
 }
-enable_extension appindicatorsupport@rgcjonas.gmail.com
-enable_extension caffeine@patapon.info
+
+echo "Enabling GNOME extensions..."
+gsettings_append org.gnome.shell enabled-extensions appindicatorsupport@rgcjonas.gmail.com
+gsettings_append org.gnome.shell enabled-extensions caffeine@patapon.info
 
 echo "Setting default apps..."
 xdg-settings set default-web-browser app.zen_browser.zen.desktop
@@ -150,11 +152,10 @@ add_custom_keybinding() {
   local name="$1" binding="$2" command="$3"
   local schema="org.gnome.settings-daemon.plugins.media-keys"
   local base="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
-  local current items path i=0
+  local current path i=0
   current=$(gsettings get "$schema" custom-keybindings)
-  items=$(tr -d '[]' <<<"${current#@as }")
   # Skip if a shortcut with this name already exists
-  for path in $(tr -d "'," <<<"$items"); do
+  for path in $(tr -d "'[]," <<<"${current#@as }"); do
     [[ "$(gsettings get "$schema.custom-keybinding:$path" name)" == "'$name'" ]] && return
   done
   while [[ "$current" == *"$base/custom$i/"* ]]; do i=$((i + 1)); done
@@ -162,7 +163,7 @@ add_custom_keybinding() {
   gsettings set "$schema.custom-keybinding:$path" name "$name"
   gsettings set "$schema.custom-keybinding:$path" binding "$binding"
   gsettings set "$schema.custom-keybinding:$path" command "$command"
-  gsettings set "$schema" custom-keybindings "[${items:+$items, }'$path']"
+  gsettings_append "$schema" custom-keybindings "$path"
 }
 gsettings set org.gnome.desktop.wm.keybindings switch-input-source "[]"          # Free up Super+Space
 gsettings set org.gnome.desktop.wm.keybindings switch-input-source-backward "[]" # Free up Shift+Super+Space
