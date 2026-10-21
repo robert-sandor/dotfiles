@@ -28,7 +28,6 @@ common_formulae=(
   ripgrep
   rsync
   starship
-  tealdeer
   yazi
   zoxide
 )
@@ -85,7 +84,7 @@ fi
 appstore_apps=(
   1530145038 # Amperfy - music player for Navidrome
   1352778147 # Bitwarden - password manager, appstore release for touch ID support
-  310633997 # WhatsApp - consider if needed
+  310633997  # WhatsApp - consider if needed
   1451685025 # Wireguard - VPN to home
 )
 
@@ -112,15 +111,15 @@ fi
 ## Settings
 # Dock
 echo "Setting up the dock..."
-defaults write com.apple.dock "orientation" -string "bottom" # Dock at the bottom
-defaults write com.apple.dock "tilesize" -int "48" # Set icon size
-defaults write com.apple.dock "autohide" -bool "true" # Autohide the dock
+defaults write com.apple.dock "orientation" -string "bottom"        # Dock at the bottom
+defaults write com.apple.dock "tilesize" -int "48"                  # Set icon size
+defaults write com.apple.dock "autohide" -bool "true"               # Autohide the dock
 defaults write com.apple.dock "autohide-time-modifier" -float "0.2" # Faster dock animation
-defaults write com.apple.dock "autohide-delay" -float "0" # Show dock faster
-defaults write com.apple.dock "show-recents" -bool "false" # Don't show recent apps
-defaults write com.apple.dock "mineffect" -string "scale" # Animation when minimizing
-defaults write com.apple.dock "wvous-tl-corner" -int "2" # Top-left hot corner: Mission Control (GNOME Activities-style)
-defaults write com.apple.dock "wvous-tl-modifier" -int "0" # No modifier key needed
+defaults write com.apple.dock "autohide-delay" -float "0"           # Show dock faster
+defaults write com.apple.dock "show-recents" -bool "false"          # Don't show recent apps
+defaults write com.apple.dock "mineffect" -string "scale"           # Animation when minimizing
+defaults write com.apple.dock "wvous-tl-corner" -int "2"            # Top-left hot corner: Mission Control (GNOME Activities-style)
+defaults write com.apple.dock "wvous-tl-modifier" -int "0"          # No modifier key needed
 
 add_dock_folder() { # path, label
   defaults write com.apple.dock persistent-others -array-add "<dict>
@@ -149,30 +148,30 @@ killall Dock 2>/dev/null || true
 
 # Finder
 echo "Setting up finder..."
-defaults write NSGlobalDomain "AppleShowAllExtensions" -bool "true" # Always show extensions
-defaults write com.apple.finder "AppleShowAllFiles" -bool "true" # Always show hidden files
-defaults write com.apple.finder "ShowPathbar" -bool "true" # Always show path bar
-defaults write com.apple.finder "FXPreferredViewStyle" -string "Nlsv" # List view by default
-defaults write com.apple.finder "_FXSortFoldersFirst" -bool "true" # Keep folders on top
+defaults write NSGlobalDomain "AppleShowAllExtensions" -bool "true"             # Always show extensions
+defaults write com.apple.finder "AppleShowAllFiles" -bool "true"                # Always show hidden files
+defaults write com.apple.finder "ShowPathbar" -bool "true"                      # Always show path bar
+defaults write com.apple.finder "FXPreferredViewStyle" -string "Nlsv"           # List view by default
+defaults write com.apple.finder "_FXSortFoldersFirst" -bool "true"              # Keep folders on top
 defaults write NSGlobalDomain "NSDocumentSaveNewDocumentsToCloud" -bool "false" # Save documents locally by default
-defaults write com.apple.finder "ShowStatusBar" -bool "true" # Always show status bar
-defaults write com.apple.finder "CreateDesktop" -bool "false" # Don't show icons on desktop
+defaults write com.apple.finder "ShowStatusBar" -bool "true"                    # Always show status bar
+defaults write com.apple.finder "CreateDesktop" -bool "false"                   # Don't show icons on desktop
 killall Finder 2>/dev/null || true
 
 # Inputs
 echo "Setting up input settings..."
-defaults write NSGlobalDomain "ApplePressAndHoldEnabled" -bool "false" # Holding a key repeats
-defaults write NSGlobalDomain AppleKeyboardUIMode -int "2" # Enable UI keyboard navigation using Tab and Shift-Tab
+defaults write NSGlobalDomain "ApplePressAndHoldEnabled" -bool "false"         # Holding a key repeats
+defaults write NSGlobalDomain AppleKeyboardUIMode -int "2"                     # Enable UI keyboard navigation using Tab and Shift-Tab
 defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false # Disable the double Space insert period bs
-defaults write NSGlobalDomain KeyRepeat -int "2" # Fast key repeat rate
-defaults write NSGlobalDomain InitialKeyRepeat -int "15" # Short delay until repeat starts
+defaults write NSGlobalDomain KeyRepeat -int "2"                               # Fast key repeat rate
+defaults write NSGlobalDomain InitialKeyRepeat -int "15"                       # Short delay until repeat starts
 
 # Trackpad
 echo "Setting up trackpad settings..."
 for domain in com.apple.AppleMultitouchTrackpad com.apple.driver.AppleBluetoothMultitouch.trackpad; do
-  defaults write "$domain" "Clicking" -bool "false" # Tap to click off (physical click only)
-  defaults write "$domain" "TrackpadRightClick" -bool "true" # Two-finger right click
-  defaults write "$domain" "DragLock" -bool "false" # Drag lock off
+  defaults write "$domain" "Clicking" -bool "false"                # Tap to click off (physical click only)
+  defaults write "$domain" "TrackpadRightClick" -bool "true"       # Two-finger right click
+  defaults write "$domain" "DragLock" -bool "false"                # Drag lock off
   defaults write "$domain" "TrackpadThreeFingerDrag" -bool "false" # Three-finger drag off
 done
 defaults write NSGlobalDomain "com.apple.mouse.tapBehavior" -int "0" # Tap to click off, mirrored in NSGlobalDomain
@@ -181,8 +180,8 @@ defaults write NSGlobalDomain "com.apple.mouse.tapBehavior" -int "0" # Tap to cl
 echo "Setting up screenshot settings..."
 mkdir -p "$HOME/Pictures/Screenshots"
 defaults write com.apple.screencapture "location" -string "$HOME/Pictures/Screenshots" # Save location
-defaults write com.apple.screencapture "type" -string "png" # File format
-defaults write com.apple.screencapture "disable-shadow" -bool "false" # Keep window shadows
+defaults write com.apple.screencapture "type" -string "png"                            # File format
+defaults write com.apple.screencapture "disable-shadow" -bool "false"                  # Keep window shadows
 killall SystemUIServer 2>/dev/null || true
 
 # Menu bar
@@ -191,11 +190,11 @@ defaults write com.apple.controlcenter "BatteryShowPercentage" -bool "true" # Sh
 
 # Screensaver
 echo "Setting up screensaver settings..."
-defaults write com.apple.screensaver "askForPassword" -bool "true" # Require password after screensaver/sleep
+defaults write com.apple.screensaver "askForPassword" -bool "true"  # Require password after screensaver/sleep
 defaults write com.apple.screensaver "askForPasswordDelay" -int "0" # Ask immediately, no grace period
 
 # Misc
 echo "Setting up misc settings..."
 defaults write com.apple.appleseed.FeedbackAssistant "Autogather" -bool "false" # Do not autogather large files when submitting a report
-defaults write com.apple.ActivityMonitor "UpdatePeriod" -int "1" # Activity Monitor faster updates
+defaults write com.apple.ActivityMonitor "UpdatePeriod" -int "1"                # Activity Monitor faster updates
 killall "Activity Monitor" 2>/dev/null || true

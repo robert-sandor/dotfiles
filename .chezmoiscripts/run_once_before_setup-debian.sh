@@ -27,7 +27,6 @@ packages=(
   ripgrep
   rsync
   starship
-  tealdeer
   unzip
   yazi
   zoxide

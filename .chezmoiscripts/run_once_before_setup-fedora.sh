@@ -45,7 +45,6 @@ packages=(
   rsync
   starship
   tailscale
-  tealdeer
   vicinae
   yazi
   zed
