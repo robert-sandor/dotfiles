@@ -127,6 +127,10 @@ enable_extension() {
 enable_extension appindicatorsupport@rgcjonas.gmail.com
 enable_extension caffeine@patapon.info
 
+echo "Setting default apps..."
+xdg-settings set default-web-browser app.zen_browser.zen.desktop
+xdg-mime default me.proton.Mail.desktop x-scheme-handler/mailto
+
 ## Settings
 echo "Setting up GNOME..."
 
@@ -140,6 +144,29 @@ gsettings set org.gnome.desktop.interface show-battery-percentage true # Show ba
 gsettings set org.gnome.desktop.input-sources xkb-options "['caps:escape']" # Caps Lock acts as Escape
 gsettings set org.gnome.desktop.peripherals.mouse accel-profile "flat"      # No mouse acceleration
 gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click false     # Tap to click off (physical click only)
+
+# Shortcuts
+add_custom_keybinding() {
+  local name="$1" binding="$2" command="$3"
+  local schema="org.gnome.settings-daemon.plugins.media-keys"
+  local base="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
+  local current items path i=0
+  current=$(gsettings get "$schema" custom-keybindings)
+  items=$(tr -d '[]' <<<"${current#@as }")
+  # Skip if a shortcut with this name already exists
+  for path in $(tr -d "'," <<<"$items"); do
+    [[ "$(gsettings get "$schema.custom-keybinding:$path" name)" == "'$name'" ]] && return
+  done
+  while [[ "$current" == *"$base/custom$i/"* ]]; do i=$((i + 1)); done
+  path="$base/custom$i/"
+  gsettings set "$schema.custom-keybinding:$path" name "$name"
+  gsettings set "$schema.custom-keybinding:$path" binding "$binding"
+  gsettings set "$schema.custom-keybinding:$path" command "$command"
+  gsettings set "$schema" custom-keybindings "[${items:+$items, }'$path']"
+}
+gsettings set org.gnome.desktop.wm.keybindings switch-input-source "[]"          # Free up Super+Space
+gsettings set org.gnome.desktop.wm.keybindings switch-input-source-backward "[]" # Free up Shift+Super+Space
+add_custom_keybinding vicinae "<Super>space" "vicinae toggle"                    # Launcher
 
 # Privacy
 gsettings set org.gnome.desktop.privacy report-technical-problems false # Don't report technical problems
