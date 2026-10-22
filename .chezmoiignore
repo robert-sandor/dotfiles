@@ -1,4 +1,5 @@
 README.md
+system
 .config/niri/noctalia.kdl
 
 # local, machine-only shell config - never managed by chezmoi
@@ -31,6 +32,8 @@ README.md
 {{ if not (and (eq .osid "linux-fedora") (get . "gaming")) }}
 .local/bin/steam-gamescope-session
 .local/bin/steamos-session-select
+.local/bin/steam-gaming-mode
+.local/share/applications/steam-gaming-mode.desktop
 {{ end }}
 
 # macOS Finder metadata

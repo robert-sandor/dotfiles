@@ -1,0 +1,12 @@
+// Let a local, active user start/stop their own Steam gaming mode service
+// (steam-gamescope@<user>.service) without a password.
+polkit.addRule(function (action, subject) {
+  if (
+    action.id == "org.freedesktop.systemd1.manage-units" &&
+    action.lookup("unit") == "steam-gamescope@" + subject.user + ".service" &&
+    subject.local &&
+    subject.active
+  ) {
+    return polkit.Result.YES;
+  }
+});

@@ -1,0 +1,29 @@
+# Steam gaming mode on its own VT (tty8), started from a running desktop
+# session by ~/.local/bin/steam-gaming-mode. The instance name is the user,
+# e.g. steam-gamescope@alice.service. Gets its own login session, so gamescope
+# can take over the display while the desktop session keeps running on its VT.
+
+[Unit]
+Description=Steam gaming mode for %i on tty8
+After=systemd-user-sessions.service getty@tty8.service
+Conflicts=getty@tty8.service
+
+[Service]
+User=%i
+PAMName=login
+TTYPath=/dev/tty8
+TTYReset=yes
+TTYVHangup=yes
+TTYVTDisallocate=yes
+StandardInput=tty-fail
+StandardOutput=journal
+UtmpIdentifier=tty8
+UtmpMode=user
+Environment=XDG_SESSION_TYPE=wayland XDG_SESSION_CLASS=user
+
+# Switch to tty8 first, so the new session is the active one and gamescope can
+# take the display
+ExecStartPre=+/usr/bin/chvt 8
+ExecStart=/bin/sh -c 'exec "$$HOME/.local/bin/steam-gamescope-session"'
+# Back to the user's desktop session (Steam quit or "Switch to Desktop")
+ExecStopPost=+/bin/sh -c 'loginctl activate "$$(loginctl show-user %i -p Display --value)"'

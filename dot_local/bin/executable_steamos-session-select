@@ -1,4 +1,5 @@
 #!/bin/sh
-# Steam calls this for "Switch to Desktop". Quitting Steam ends the gaming mode
-# session, which drops back to the login screen to pick GNOME/niri.
+# Steam calls this for "Switch to Desktop". Quitting Steam ends gaming mode:
+# the login screen session drops back to the login screen, the tty8 one back
+# to the desktop session it was started from.
 exec steam -shutdown

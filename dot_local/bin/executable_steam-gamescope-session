@@ -1,6 +1,7 @@
 #!/bin/sh
 # Steam Big Picture inside gamescope, like SteamOS's gaming mode.
-# Started from the "Steam (Gaming Mode)" login screen session.
+# Started from the "Steam (Gaming Mode)" login screen session, or on tty8 by
+# steam-gamescope@.service (~/.local/bin/steam-gaming-mode).
 
 # Steam finds steamos-session-select ("Switch to Desktop") on PATH
 export PATH="$HOME/.local/bin:$PATH"

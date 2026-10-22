@@ -19,18 +19,4 @@ sudo dnf install -y "${packages[@]}"
 
 echo "Installing gaming flatpaks..."
 flatpak install -y --noninteractive flathub "${flatpaks[@]}"
-
-# Gaming mode: a login-screen session that boots straight into Steam Big Picture
-# inside gamescope (~/.local/bin/steam-gamescope-session). GDM only reads
-# sessions from system dirs, hence sudo.
-echo "Installing Steam gaming mode session..."
-sudo mkdir -p /usr/local/share/wayland-sessions
-sudo tee /usr/local/share/wayland-sessions/steam-gamescope.desktop >/dev/null <<'EOF'
-[Desktop Entry]
-Name=Steam (Gaming Mode)
-Comment=Steam Big Picture in gamescope
-Exec={{ .chezmoi.homeDir }}/.local/bin/steam-gamescope-session
-Type=Application
-DesktopNames=gamescope
-EOF
 {{ end -}}

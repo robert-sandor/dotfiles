@@ -1,0 +1,20 @@
+{{ if and (eq .osid "linux-fedora") (not .headless) (get . "gaming") -}}
+#!/usr/bin/env bash
+set -eo pipefail
+
+# Gaming mode: Steam Big Picture inside gamescope (~/.local/bin/steam-gamescope-session),
+# either picked as a session on the login screen, or started from the desktop on
+# its own VT (~/.local/bin/steam-gaming-mode). System files live in system/gaming;
+# their hashes below make this script re-run when they change:
+{{- range glob (joinPath .chezmoi.sourceDir "system/gaming/*") }}
+# {{ base . }}: {{ include . | sha256sum }}
+{{- end }}
+echo "Installing Steam gaming mode..."
+src="{{ joinPath .chezmoi.sourceDir "system/gaming" }}"
+sudo install -D -m 644 /dev/stdin /usr/local/share/wayland-sessions/steam-gamescope.desktop <<'EOF'
+{{ includeTemplate "system/gaming/steam-gamescope.desktop.tmpl" . -}}
+EOF
+sudo install -D -m 644 "$src/steam-gamescope@.service" /etc/systemd/system/steam-gamescope@.service
+sudo install -D -m 644 "$src/steam-gamescope.rules" /etc/polkit-1/rules.d/50-steam-gamescope.rules
+sudo systemctl daemon-reload
+{{ end -}}

@@ -1,0 +1,13 @@
+#!/bin/sh
+# Start Steam gaming mode on its own VT from the desktop, and come back to the
+# desktop when Steam quits. Desktop apps keep running in the meantime.
+
+# Steam only runs once per user, so close the desktop instance first
+if pgrep -x steam >/dev/null; then
+  steam -shutdown
+  timeout 30 pidwait -x steam || true
+fi
+
+# Allowed without a password by /etc/polkit-1/rules.d/50-steam-gamescope.rules.
+# The service switches back to this session when it stops.
+exec systemctl start "steam-gamescope@$USER.service"
