@@ -1,0 +1,29 @@
+#!/bin/sh
+# Steam Big Picture inside gamescope, like SteamOS's gaming mode.
+# Started from the "Steam (Gaming Mode)" login screen session.
+
+# Steam finds steamos-session-select ("Switch to Desktop") on PATH
+export PATH="$HOME/.local/bin:$PATH"
+
+# MangoHud runs via --mangoapp here and is controlled by Steam's own
+# performance overlay slider, so don't also inject it into every game
+unset MANGOHUD
+
+# gamescope --steam already tells Steam which features it supports (VRR, HDR,
+# tearing, MangoHud, ...), so only add what it doesn't set itself.
+export STEAM_ENABLE_VOLUME_HANDLER=1      # volume keys handled by Steam
+export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0 # don't minimise SDL games on focus loss
+
+# Where Steam saves the chosen display mode, read back by gamescope on start.
+# Steam only offers resolution settings (and skips its 1080p cap on large
+# displays) when this is set.
+export GAMESCOPE_MODE_SAVE_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/gamescope/modes.cfg"
+export GAMESCOPE_PATCHED_EDID_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/gamescope/edid.bin" # for HDR
+mkdir -p "$(dirname "$GAMESCOPE_MODE_SAVE_FILE")"
+
+# VRR and HDR aren't set here: Steam applies its own saved settings on start
+exec gamescope \
+  --steam \
+  --xwayland-count 2 \
+  --mangoapp \
+  -- steam -gamepadui -steamos3

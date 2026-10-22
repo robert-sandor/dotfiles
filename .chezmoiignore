@@ -28,5 +28,10 @@ README.md
 .config/environment.d/mangohud.conf
 {{ end }}
 
+{{ if not (and (eq .osid "linux-fedora") (get . "gaming")) }}
+.local/bin/steam-gamescope-session
+.local/bin/steamos-session-select
+{{ end }}
+
 # macOS Finder metadata
 **/.DS_Store
