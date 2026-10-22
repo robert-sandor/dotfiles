@@ -2,6 +2,7 @@
 {{- $name := "Robert Sandor" -}}
 {{- $work := false -}}
 {{- $headless := true -}}
+{{- $gaming := false -}}
 {{- if eq .chezmoi.os "darwin" -}}
 {{-   $headless = false -}}
 {{- end -}}
@@ -12,6 +13,9 @@
 {{-   $work = promptBoolOnce . "work" "work machine" false -}}
 {{-   if eq .chezmoi.os "linux" -}}
 {{-     $headless = promptBoolOnce . "headless" "headless" false -}}
+{{-     if not $headless -}}
+{{-       $gaming = promptBoolOnce . "gaming" "install gaming packages" false -}}
+{{-     end -}}
 {{-   end -}}
 {{- end -}}
 
@@ -32,6 +36,7 @@ email = {{ $email | quote }}
 name = {{ $name | quote }}
 headless = {{ $headless }}
 work = {{ $work }}
+gaming = {{ $gaming }}
 font = {{ $font | quote }}
 fontSize = {{ $fontSize }}
 osid = {{ $osID | quote }}

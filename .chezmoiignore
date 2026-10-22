@@ -23,5 +23,10 @@ README.md
 .config/zed
 {{ end }}
 
+{{ if not (get . "gaming") }}
+.config/MangoHud
+.config/environment.d/mangohud.conf
+{{ end }}
+
 # macOS Finder metadata
 **/.DS_Store

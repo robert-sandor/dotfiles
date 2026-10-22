@@ -1,0 +1,23 @@
+{{ if and (eq .osid "linux-fedora") (not .headless) (get . "gaming") -}}
+#!/usr/bin/env bash
+set -eo pipefail
+
+packages=(
+  steam                    # RPM Fusion nonfree, pulls 32-bit Mesa + steam-devices
+  mesa-vulkan-drivers.i686 # 32-bit Vulkan for older Proton games
+  gamemode                 # gamemoderun %command%
+  mangohud.x86_64          # FPS/frametime overlay
+  mangohud.i686            # overlay for 32-bit games
+  gamescope                # micro-compositor: upscaling, HDR, frame limiting
+)
+
+flatpaks=(
+  com.vysp3r.ProtonPlus # GE-Proton and other Proton builds
+)
+
+echo "Installing gaming packages..."
+sudo dnf install -y "${packages[@]}"
+
+echo "Installing gaming flatpaks..."
+flatpak install -y --noninteractive flathub "${flatpaks[@]}"
+{{ end -}}
