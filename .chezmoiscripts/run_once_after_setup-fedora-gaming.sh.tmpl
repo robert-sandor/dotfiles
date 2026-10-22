@@ -20,4 +20,45 @@ sudo dnf install -y "${packages[@]}"
 
 echo "Installing gaming flatpaks..."
 flatpak install -y --noninteractive flathub "${flatpaks[@]}"
+
+# Gaming mode: a login-screen session that boots straight into Steam Big Picture
+# inside gamescope, like SteamOS. GDM only reads system dirs, hence sudo.
+echo "Installing Steam gaming mode session..."
+
+sudo tee /usr/local/bin/steam-gamescope-session >/dev/null <<'EOF'
+#!/bin/sh
+# Steam Big Picture inside gamescope, like SteamOS's gaming mode.
+# Resolution and refresh rate come from the display's native mode.
+
+# MangoHud runs via --mangoapp here and is controlled by Steam's own
+# performance overlay slider, so don't also inject it into every game
+unset MANGOHUD
+
+exec gamescope \
+  --steam \
+  --xwayland-count 2 \
+  --mangoapp \
+  --adaptive-sync \
+  --hdr-enabled \
+  -- steam -gamepadui -steamos3
+EOF
+
+# Steam calls this for "Switch to Desktop". Quitting Steam ends the session,
+# which drops back to the login screen to pick GNOME/niri.
+sudo tee /usr/local/bin/steamos-session-select >/dev/null <<'EOF'
+#!/bin/sh
+exec steam -shutdown
+EOF
+
+sudo chmod 755 /usr/local/bin/steam-gamescope-session /usr/local/bin/steamos-session-select
+
+sudo mkdir -p /usr/local/share/wayland-sessions
+sudo tee /usr/local/share/wayland-sessions/steam-gamescope.desktop >/dev/null <<'EOF'
+[Desktop Entry]
+Name=Steam (Gaming Mode)
+Comment=Steam Big Picture in gamescope
+Exec=/usr/local/bin/steam-gamescope-session
+Type=Application
+DesktopNames=gamescope
+EOF
 {{ end -}}
