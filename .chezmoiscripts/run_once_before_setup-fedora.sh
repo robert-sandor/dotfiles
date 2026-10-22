@@ -34,6 +34,7 @@ packages=(
   helium-browser-bin
   helix
   jetbrainsmono-nerd-fonts
+  jq
   libheif-freeworld
   mesa-va-drivers-freeworld
   mise
@@ -41,6 +42,7 @@ packages=(
   niri
   noctalia
   podman
+  proton-vpn-gnome-desktop
   ripgrep
   rsync
   starship
@@ -63,9 +65,7 @@ flatpaks=(
   com.mastermindzh.tidal-hifi      # tidal
   com.mattjakeman.ExtensionManager # GNOME Shell extensions
   com.orcaslicer.OrcaSlicer        # orcaslicer
-  com.protonvpn.www                # protonvpn
   com.todoist.Todoist              # todoist-app
-  me.proton.Mail                   # proton-mail
   org.gtk.Gtk3theme.adw-gtk3-dark  # GTK3 theme for flatpaks, pairs with adw-gtk3-theme
   org.jeffvli.feishin              # music player (Navidrome/Jellyfin client)
   org.jellyfin.JellyfinDesktop     # jellyfin-media-player
@@ -94,6 +94,11 @@ if [[ ! -f /etc/yum.repos.d/tailscale.repo ]]; then
   sudo dnf config-manager addrepo --from-repofile=https://pkgs.tailscale.com/stable/fedora/tailscale.repo
 fi
 
+echo "Adding Proton VPN repository..."
+if ! rpm -q protonvpn-stable-release &>/dev/null; then
+  sudo dnf install -y "https://repo.protonvpn.com/fedora-$(rpm -E %fedora)-stable/protonvpn-stable-release/protonvpn-stable-release-1.0.5-1.noarch.rpm"
+fi
+
 echo "Installing codecs..."
 # RPM Fusion's ffmpeg replaces Fedora's stripped-down ffmpeg-free/libavcodec-free
 if ! rpm -q ffmpeg &>/dev/null; then
@@ -102,6 +107,18 @@ fi
 
 echo "Installing packages..."
 sudo dnf install -y "${packages[@]}"
+
+echo "Installing Proton Mail..."
+# No dnf repo and the RPM is unsigned: take the latest Stable entry from Proton's version index and verify its SHA-512
+if ! rpm -q proton-mail &>/dev/null; then
+  read -r mail_url mail_sha < <(curl -fsSL https://proton.me/download/mail/linux/version.json |
+    jq -r 'first(.Releases[] | select(.CategoryName == "Stable")).File[] | select(.Identifier | contains(".rpm")) | "\(.Url) \(.Sha512CheckSum)"')
+  mail_dir=$(mktemp -d)
+  curl -fsSL -o "$mail_dir/proton-mail.rpm" "$mail_url"
+  echo "$mail_sha  $mail_dir/proton-mail.rpm" | sha512sum -c -
+  sudo dnf install -y "$mail_dir/proton-mail.rpm"
+  rm -rf "$mail_dir"
+fi
 
 echo "Adding Flathub remote..."
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -131,7 +148,7 @@ gsettings_append org.gnome.shell enabled-extensions caffeine@patapon.info
 
 echo "Setting default apps..."
 xdg-settings set default-web-browser app.zen_browser.zen.desktop
-xdg-mime default me.proton.Mail.desktop x-scheme-handler/mailto
+xdg-mime default proton-mail.desktop x-scheme-handler/mailto
 
 ## Settings
 echo "Setting up GNOME..."
