@@ -44,7 +44,15 @@
     "superpowers@anthropic-plugin-directory": true,
     "code-review-anthropics@anthropic-plugin-directory": true,
     "code-simplifier@anthropic-plugin-directory": true,
-    "caveman@anthropic-plugin-directory": true
+    "caveman@caveman": true
+  },
+  "extraKnownMarketplaces": {
+    "caveman": {
+      "source": {
+        "source": "github",
+        "repo": "JuliusBrussee/caveman"
+      }
+    }
   },
   "sandbox": {
     "enabled": true,
