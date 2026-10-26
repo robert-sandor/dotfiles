@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "deny": [
+      "Read(~/.ssh/**)",
+      "Read(~/.gnupg/**)",
+      "Read(~/.aws/**)",
+      "Read(~/.azure/**)",
+      "Read(~/.config/gcloud/**)",
+      "Read(~/.kube/**)",
+      "Read(~/.docker/config.json)",
+      "Read(~/.config/gh/**)",
+      "Read(~/.git-credentials)",
+      "Read(~/.config/git/credentials)",
+      "Read(~/.netrc)",
+      "Read(~/.npmrc)",
+      "Read(~/.pypirc)",
+      "Read(~/.cargo/credentials.toml)",
+      "Read(~/.password-store/**)",
+      "Read(~/.local/share/keyrings/**)",
+      "Read(~/.config/sops/**)",
+      "Read(~/.config/age/**)",
+      "Read(~/Library/Application Support/sops/**)",
+      "Read(//**/*.sops.*)",
+      "Read(//**/*.enc.*)",
+      "Read(~/.claude/.credentials.json)",
+      "Read(~/.bashrc.local)",
+      "Read(~/.zshrc.local)",
+      "Read(~/.config/fish/local.fish)",
+      "Read(~/.bash_history)",
+      "Read(~/.zsh_history)",
+      "Read(~/.config/zsh/.zsh_history)",
+      "Read(~/.local/share/fish/fish_history)",
+      "Edit(~/.claude/settings.json)",
+      "Edit(~/.local/share/chezmoi/dot_claude/**)"
+    ]
+  },
+  "model": "opusplan",
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline.sh"
+  },
+  "enabledPlugins": {
+    "superpowers@anthropic-plugin-directory": true,
+    "code-review-anthropics@anthropic-plugin-directory": true,
+    "code-simplifier@anthropic-plugin-directory": true,
+    "caveman@anthropic-plugin-directory": true
+  },
+  "sandbox": {
+    "enabled": true,
+    "failIfUnavailable": true,
+    "allowUnsandboxedCommands": false,
+    "credentials": {
+      "envVars": [
+        {
+          "name": "GITHUB_TOKEN",
+          "mode": "deny"
+        },
+        {
+          "name": "GH_TOKEN",
+          "mode": "deny"
+        },
+        {
+          "name": "ANTHROPIC_API_KEY",
+          "mode": "deny"
+        },
+        {
+          "name": "OPENAI_API_KEY",
+          "mode": "deny"
+        },
+        {
+          "name": "AWS_ACCESS_KEY_ID",
+          "mode": "deny"
+        },
+        {
+          "name": "AWS_SECRET_ACCESS_KEY",
+          "mode": "deny"
+        },
+        {
+          "name": "AWS_SESSION_TOKEN",
+          "mode": "deny"
+        },
+        {
+          "name": "NPM_TOKEN",
+          "mode": "deny"
+        },
+        {
+          "name": "SSH_AUTH_SOCK",
+          "mode": "deny"
+        },
+        {
+          "name": "SOPS_AGE_KEY",
+          "mode": "deny"
+        },
+        {
+          "name": "SOPS_AGE_KEY_FILE",
+          "mode": "deny"
+        },
+        {
+          "name": "SOPS_AGE_KEY_CMD",
+          "mode": "deny"
+        },
+        {
+          "name": "SOPS_AGE_SSH_PRIVATE_KEY_FILE",
+          "mode": "deny"
+        },
+        {
+          "name": "SOPS_PGP_FP",
+          "mode": "deny"
+        },
+        {
+          "name": "AGE_KEY",
+          "mode": "deny"
+        },
+        {
+          "name": "AGE_KEY_FILE",
+          "mode": "deny"
+        },
+        {
+          "name": "AGE_IDENTITY",
+          "mode": "deny"
+        }
+      ]
+    }
+  },
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "medium"
+    }
+  },
+  "tui": "fullscreen",
+  "theme": "auto"
+}
