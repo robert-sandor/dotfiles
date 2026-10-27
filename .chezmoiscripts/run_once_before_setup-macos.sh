@@ -5,7 +5,7 @@ if [[ "$OSID" != "darwin" ]]; then
   exit 0
 fi
 
-common_formulae=(
+formulae=(
   bash
   bat
   btop
@@ -32,15 +32,11 @@ common_formulae=(
   tree-sitter-cli
   yazi
   zoxide
-)
-personal_formulae=(
   lima
   podman
 )
-work_formulae=(
-)
 
-common_casks=(
+casks=(
   alfred
   appcleaner
   betterdisplay
@@ -53,8 +49,6 @@ common_casks=(
   rectangle
   unnaturalscrollwheels
   zed
-)
-personal_casks=(
   balenaetcher
   discord
   helium-browser
@@ -68,21 +62,6 @@ personal_casks=(
   todoist-app
   zen
 )
-work_casks=(
-  docker-desktop
-  google-chrome
-  jetbrains-toolbox
-  postman
-  slack
-)
-
-if [[ "$WORK" == "true" ]]; then
-  formulae=("${common_formulae[@]}" "${work_formulae[@]}")
-  casks=("${common_casks[@]}" "${work_casks[@]}")
-else
-  formulae=("${common_formulae[@]}" "${personal_formulae[@]}")
-  casks=("${common_casks[@]}" "${personal_casks[@]}")
-fi
 
 appstore_apps=(
   1530145038 # Amperfy - music player for Navidrome
@@ -106,10 +85,8 @@ brew install --no-ask --quiet --formulae "${formulae[@]}"
 echo "Installing casks..."
 brew install --no-ask --quiet --casks "${casks[@]}"
 
-if [[ "$WORK" == "false" ]]; then
-  echo "Installing Mac Appstore apps..."
-  mas install "${appstore_apps[@]}" || echo "mas install failed — check you're signed into the App Store"
-fi
+echo "Installing Mac Appstore apps..."
+mas install "${appstore_apps[@]}" || echo "mas install failed — check you're signed into the App Store"
 
 ## Settings
 # Dock

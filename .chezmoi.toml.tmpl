@@ -1,6 +1,5 @@
 {{- $email := "sandorrobertk94@gmail.com" -}}
 {{- $name := "Robert Sandor" -}}
-{{- $work := false -}}
 {{- $headless := true -}}
 {{- $gaming := false -}}
 {{- if eq .chezmoi.os "darwin" -}}
@@ -10,7 +9,6 @@
 {{- if stdinIsATTY -}}
 {{-   $email = promptStringOnce . "email" "git email" $email -}}
 {{-   $name = promptStringOnce . "name" "git name" $name -}}
-{{-   $work = promptBoolOnce . "work" "work machine" false -}}
 {{-   if eq .chezmoi.os "linux" -}}
 {{-     $headless = promptBoolOnce . "headless" "headless" false -}}
 {{-     if not $headless -}}
@@ -35,7 +33,6 @@
 email = {{ $email | quote }}
 name = {{ $name | quote }}
 headless = {{ $headless }}
-work = {{ $work }}
 gaming = {{ $gaming }}
 font = {{ $font | quote }}
 fontSize = {{ $fontSize }}
@@ -46,7 +43,6 @@ chezmoi_version = "v2.72.2"
 [scriptEnv]
 OSID = {{ $osID | quote }}
 HEADLESS = "{{ $headless }}"
-WORK = "{{ $work }}"
 
 [gitHub]
 refreshPeriod = "1h"
