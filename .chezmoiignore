@@ -17,6 +17,12 @@ system
 .config/aerospace
 {{ end }}
 
+{{ if .minimal }}
+.zshenv
+.config/zsh
+.config/lazygit
+{{ end }}
+
 {{ if .headless }}
 .claude
 .config/mise

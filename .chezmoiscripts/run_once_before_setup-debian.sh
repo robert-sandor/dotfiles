@@ -27,6 +27,7 @@ packages=(
   ripgrep
   rsync
   starship
+  tmux
   tree-sitter-cli
   unzip
   yazi

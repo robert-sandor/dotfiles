@@ -25,6 +25,12 @@
     },
   },
   {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "space e": "project_panel::Toggle",
+    },
+  },
+  {
     "context": "VimControl && !menu",
     "bindings": {
       "space y": ["workspace::SendKeystrokes", "\" + y"],
