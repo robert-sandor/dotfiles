@@ -5,7 +5,7 @@ if [[ "$OSID" != "linux-debian" ]]; then
   exit 0
 fi
 
-if [[ "$HEADLESS" != "true" ]]; then
+if [[ "$MINIMAL" == "true" ]]; then
   exit 0
 fi
 

@@ -2,6 +2,7 @@
 {{- $name := "Robert Sandor" -}}
 {{- $headless := true -}}
 {{- $gaming := false -}}
+{{- $minimal := promptBoolOnce . "minimal" "minimal" false -}}
 {{- if eq .chezmoi.os "darwin" -}}
 {{-   $headless = false -}}
 {{- end -}}
@@ -34,6 +35,7 @@ email = {{ $email | quote }}
 name = {{ $name | quote }}
 headless = {{ $headless }}
 gaming = {{ $gaming }}
+minimal = {{ $minimal }}
 font = {{ $font | quote }}
 fontSize = {{ $fontSize }}
 osid = {{ $osID | quote }}
@@ -43,6 +45,7 @@ chezmoi_version = "v2.72.2"
 [scriptEnv]
 OSID = {{ $osID | quote }}
 HEADLESS = "{{ $headless }}"
+MINIMAL = "{{ $minimal }}"
 
 [gitHub]
 refreshPeriod = "1h"

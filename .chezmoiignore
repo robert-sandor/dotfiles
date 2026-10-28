@@ -18,6 +18,8 @@ system
 {{ end }}
 
 {{ if .headless }}
+.claude
+.config/mise
 .ideavimrc
 .config/ghostty
 .config/posting

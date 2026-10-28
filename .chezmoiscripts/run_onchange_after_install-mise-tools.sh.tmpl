@@ -2,6 +2,10 @@
 # mise config hash: {{ include "dot_config/mise/config.toml" | sha256sum }}
 set -eo pipefail
 
+if [[ "$HEADLESS" == "true" ]]; then
+  exit 0
+fi
+
 export PATH="/opt/homebrew/bin:/usr/local/bin:$HOME/.local/bin:$PATH"
 
 if ! command -v mise >/dev/null 2>&1; then
