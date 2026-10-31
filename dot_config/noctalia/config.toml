@@ -31,6 +31,12 @@ transition = ["fade"]
 transition_duration = 500
 blur_intensity = 1.0
 
+[nightlight]
+enabled = true  # schedule follows sunset/sunrise for [location]
+force = false  # true keeps night temperature on all day
+temperature_day = 6500
+temperature_night = 4000
+
 [shell]
 font_family = "JetBrainsMono Nerd Font"
 polkit_agent = true
